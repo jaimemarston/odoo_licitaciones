@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Vistas de Licitación -->
+        <record id="view_licitacion_list" model="ir.ui.view">
+            <field name="name">licitacion.list</field>
+            <field name="model">licitaciones.licitacion</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="id_licitacion"/>
+                    <field name="titulo"/>
+                    <field name="fecha_publicacion"/>
+                    <field name="objeto_contratacion"/>
+                    <field name="monto_total"/>
+                    <field name="comprador_id"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- Vista de gráfico -->
+        <record id="view_licitacion_graph" model="ir.ui.view">
+            <field name="name">licitacion.graph</field>
+            <field name="model">licitaciones.licitacion</field>
+            <field name="arch" type="xml">
+                <graph string="Gráfico de Licitaciones">
+                    <field name="monto_total" type="measure"/>
+                    <field name="id_licitacion" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_licitacion_form" model="ir.ui.view">
+            <field name="name">licitacion.form</field>
+            <field name="model">licitaciones.licitacion</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="id_licitacion"/>
+                            <field name="titulo"/>
+                            <field name="fecha_publicacion"/>
+                            <field name="objeto_contratacion"/>
+                            <field name="metodo_adquisicion"/>
+                            <field name="categoria_adquisicion"/>
+                            <field name="descripcion_objeto"/>
+                            <field name="monto_total"/>
+                            <field name="moneda"/>
+                            <field name="comprador_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Ítems">
+                                <field name="item_ids">
+                                    <list>
+                                        <field name="id_item"/>
+                                        <field name="descripcion"/>
+                                        <field name="cantidad"/>
+                                        <field name="valor_total"/>
+                                        <field name="estado"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Documentos">
+                                <field name="documento_ids">
+                                    <list>
+                                        <field name="id_documento" width="50px"/>
+                                        <field name="titulo"/>
+                                        <field name="url" widget="url" width="150px"/>
+                                        <field name="tipo_documento"/>
+                                        <field name="fecha_publicacion"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Cronograma">
+                                <field name="cronograma_ids">
+                                    <list>
+                                        <field name="tipo_periodo"/>
+                                        <field name="fecha_inicio"/>
+                                        <field name="fecha_fin"/>
+                                        <field name="duracion_dias"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Postores">
+                                <field name="postores_ids">
+                                    <list>
+                                        <field name="ruc"/>
+                                        <field name="nombre"/>
+                                        <field name="ganador_estado" widget="badge" attrs="{'invisible': [('ganador_estado', '=', False)]}" options="{'class': 'o_tag_success'}"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <!-- Vista de Búsqueda -->
+        <record id="view_licitacion_search" model="ir.ui.view">
+            <field name="name">licitacion.search</field>
+            <field name="model">licitaciones.licitacion</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="id_licitacion" string="ID Licitación"/>
+                    <field name="titulo" string="Título"/>
+                    <field name="fecha_publicacion" string="Fecha de Publicación"/>
+                    <field name="objeto_contratacion" string="Objeto de Contratación"/>
+                    <field name="monto_total" string="Monto Total"/>
+                    <field name="comprador_id" string="Comprador"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Acción de Licitación -->
+        <record id="action_licitacion" model="ir.actions.act_window">
+            <field name="name">Licitaciones</field>
+            <field name="res_model">licitaciones.licitacion</field>
+            <field name="view_mode">list,form,graph</field>
+            <field name="search_view_id" ref="view_licitacion_search"/>
+        </record>
+
+       
+    </data>
+
+
+</odoo>

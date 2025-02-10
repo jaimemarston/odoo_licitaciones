@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem id="menu_licitaciones_root" name="Licitaciones" sequence="10" web_icon="licitaciones/static/description/icon.png"/>
+    <menuitem id="menu_licitaciones" name="Gestión de Licitaciones" parent="menu_licitaciones_root" action="action_licitacion" sequence="20"/> 
+    <menuitem id="menu_contratantes" name="Contratantes" parent="menu_licitaciones_root" action="action_buyer" sequence="30"/>
+    <!-- Menú para Proveedores -->
+    <menuitem id="menu_proveedores" name="Proveedores" parent="menu_licitaciones_root" action="action_proveedores" sequence="40"/>
+    <!-- Menú para Favoritos -->
+    <menuitem id="menu_licitaciones_favorites" name="Favoritos" parent="menu_licitaciones_root"  action="action_favorites" sequence="50"/>
+    <!-- Menú del Tablero -->
+    <menuitem id="menu_licitaciones_dashboard" name="Tablero de Licitaciones" parent="menu_licitaciones_root" action="action_licitaciones_dashboard" sequence="60"/>
+</odoo>
