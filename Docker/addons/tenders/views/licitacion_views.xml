@@ -101,13 +101,15 @@
             <field name="name">licitacion.search</field>
             <field name="model">licitaciones.licitacion</field>
             <field name="arch" type="xml">
-                <search>
-                    <field name="id_licitacion" string="ID Licitación"/>
+                <search string="Buscar por: ">
+                    <!-- <field name="id_licitacion" string="ID Licitación"/> -->
                     <field name="titulo" string="Título"/>
                     <field name="fecha_publicacion" string="Fecha de Publicación"/>
-                    <field name="objeto_contratacion" string="Objeto de Contratación"/>
-                    <field name="monto_total" string="Monto Total"/>
+                    <!-- <field name="objeto_contratacion" string="Objeto de Contratación"/> -->
+                    <field name="monto_total" string="Monto Total menor a" filter_domain="[('monto_total', '&lt;=', self)]"/>
+                    <field name="monto_total" string="Monto Total mayor a" filter_domain="[('monto_total', '&gt;=', self)]"/>
                     <field name="comprador_id" string="Comprador"/>
+                    <filter name="filter_date" date="fecha_publicacion" string="Periodo" />
                 </search>
             </field>
         </record>
@@ -118,6 +120,14 @@
             <field name="res_model">licitaciones.licitacion</field>
             <field name="view_mode">list,form,graph</field>
             <field name="search_view_id" ref="view_licitacion_search"/>
+        </record>
+
+        <record id="filter_tenders_publication_date" model="ir.filters">
+            <field name="name">By publication date</field>
+            <field name="model_id">licitaciones.licitacion</field>
+            <field name="domain">[]</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['fecha_publicacion:month']}</field>
         </record>
 
        
