@@ -7,5 +7,5 @@
     <!-- Menú para Favoritos -->
     <menuitem id="menu_licitaciones_favorites" name="Favoritos" parent="menu_licitaciones_root"  action="action_favorites" sequence="50"/>
     <!-- Menú del Tablero -->
-    <menuitem id="menu_licitaciones_dashboard" name="Tablero de Licitaciones" parent="menu_licitaciones_root" action="action_licitaciones_dashboard" sequence="60"/>
+    <menuitem id="menu_licitaciones_dashboard" name="Tablero de Licitaciones" parent="menu_licitaciones_root" action="board.open_board_my_dash_action" sequence="60"/>
 </odoo>

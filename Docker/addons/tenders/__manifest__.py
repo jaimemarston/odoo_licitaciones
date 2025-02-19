@@ -6,7 +6,7 @@
     'description': """Modulo para gestionar licitaciones.
     Incluye un formulario con campos básicos para registrar detalles de licitaciones.""",
     'author': 'Marston Software',
-    'depends': ['base', 'board'],  # Agregar 'board' como dependencia
+    'depends': ['base', 'board', 'mail'],  # Agregar 'board' como dependencia
     'data': [
         'data/licitaciones_tiposervicio_data.xml',
         'security/ir.model.access.csv',
@@ -20,5 +20,6 @@
     'images': ['static/description/icon.png'],
     'installable': True,
     'application': True,
+    'assets': {},
 }
 

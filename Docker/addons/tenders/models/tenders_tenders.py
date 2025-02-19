@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+import logging
 import re
 
 class TendersLicitacion(models.Model):
@@ -32,6 +33,9 @@ class TendersLicitacion(models.Model):
     item_ids = fields.One2many('licitaciones.item', 'licitacion_id', string="Ítems")
     cronograma_ids = fields.One2many('licitaciones.cronograma', 'licitacion_id', string="Cronograma")
 
+    total_items = fields.Char(compute='_compute_total_items', string='total items', store=True)
+    
+
     @api.depends('fecha_inicio', 'fecha_fin')
     def _compute_duracion_dias(self):
         for record in self:
@@ -40,3 +44,10 @@ class TendersLicitacion(models.Model):
                 record.duracion_dias = delta.days
             else:
                 record.duracion_dias = 0
+    
+    @api.depends("item_ids")
+    def _compute_total_items(self):
+        for record in self:
+            if record.item_ids:
+                total = len(record.item_ids)
+                record.total_items = total

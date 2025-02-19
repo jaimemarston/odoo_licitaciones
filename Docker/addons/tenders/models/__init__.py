@@ -7,3 +7,4 @@ from . import tenders_favorites
 from . import tenders_items
 from . import tenders_supplier
 from . import tenders_types_services
+from . import tenders_emails_favorites
