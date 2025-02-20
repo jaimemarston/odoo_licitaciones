@@ -6,6 +6,7 @@ import re
 class TendersLicitacion(models.Model):
     _name = 'licitaciones.licitacion'
     _description = 'Licitación'
+    _rec_name = 'id_licitacion'
 
     id_licitacion = fields.Char(string="ID Licitación", required=True)
     comprador_id = fields.Many2one('licitaciones.buyer', string="Comprador")
@@ -34,7 +35,7 @@ class TendersLicitacion(models.Model):
     cronograma_ids = fields.One2many('licitaciones.cronograma', 'licitacion_id', string="Cronograma")
 
     total_items = fields.Char(compute='_compute_total_items', string='total items', store=True)
-    
+    buyers_ids = fields.One2many('licitaciones.buyer.pivot', 'tender_id', string='Buyers')
 
     @api.depends('fecha_inicio', 'fecha_fin')
     def _compute_duracion_dias(self):

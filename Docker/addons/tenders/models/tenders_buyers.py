@@ -12,3 +12,4 @@ class TendersBuyer(models.Model):
     localidad = fields.Char(string="Localidad")
     region = fields.Char(string="Región")
     pais = fields.Char(string="País")
+    tender_ids = fields.One2many('licitaciones.buyer.pivot', 'buyer_id', string='tender')

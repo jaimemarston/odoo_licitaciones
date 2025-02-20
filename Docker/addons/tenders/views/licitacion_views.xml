@@ -48,7 +48,8 @@
                             <field name="descripcion_objeto"/>
                             <field name="monto_total"/>
                             <field name="moneda"/>
-                            <field name="comprador_id"/>
+                            <field name="comprador_id" invisible="1"/>
+                            <field name="buyers_ids" widget="many2many_tags" string="Contratantes"/>
                         </group>
                         <notebook>
                             <page string="Ítems">
@@ -110,7 +111,8 @@
                     <!-- <field name="objeto_contratacion" string="Objeto de Contratación"/> -->
                     <field name="monto_total" string="Monto Total menor a" filter_domain="[('monto_total', '&lt;=', self)]"/>
                     <field name="monto_total" string="Monto Total mayor a" filter_domain="[('monto_total', '&gt;=', self)]"/>
-                    <field name="comprador_id" string="Comprador"/>
+                    <field name="buyers_ids" string="Contratante"/>
+                    <field name="postores_ids" string="Postor"/>
                     <filter name="filter_date" date="fecha_publicacion" string="Periodo" />
                 </search>
             </field>

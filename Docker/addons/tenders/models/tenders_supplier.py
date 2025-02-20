@@ -21,3 +21,5 @@ class TendersProveedor(models.Model):
         ('obra', 'Obra'),
         ('consultoria', 'Consultoría')
     ], string="Categoría de Servicio", required=True)
+
+    bidders_ids = fields.One2many('licitaciones.postores', 'supplier_id', string='bidders')

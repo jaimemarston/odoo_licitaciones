@@ -3,7 +3,7 @@
     <data>
         <!-- Acción para abrir Proveedores -->
         <record id="action_proveedores" model="ir.actions.act_window">
-            <field name="name">Proveedores</field>
+            <field name="name">Postores</field>
             <field name="res_model">licitaciones.proveedor</field>
             <field name="view_mode">list,form</field>
         </record>
@@ -14,7 +14,7 @@
             <field name="model">licitaciones.proveedor</field>
             <field name="arch" type="xml">
                 <list>
-                    <field name="name"/>
+                    <field name="name" string="Nombre"/>
                     <field name="ruc"/>
                     <field name="direccion"/>
                     <field name="localidad"/>
@@ -45,6 +45,18 @@
                             <field name="correo"/>
                             <field name="categoria"/>
                         </group>
+
+                        <notebook>
+                            <page string="Participaciones">
+                                <field name="bidders_ids">
+                                    <list>
+                                        <field name="licitacion_id" />
+                                        <field name="fecha_publicacion" string="Fecha"/>
+                                        <field name="ganador_estado" />
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

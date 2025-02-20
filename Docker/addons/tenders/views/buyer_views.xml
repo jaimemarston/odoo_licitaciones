@@ -39,6 +39,17 @@
                             <field name="region"/>
                             <field name="pais"/>
                         </group>
+                        <notebook>
+                            <page string="Licitaciones">
+                                <field name="tender_ids">
+                                    <list>
+                                        <field name="tender_name" string="licitación"/>
+                                        <field name="tender_date" string="Fecha"/>
+                                        <field name="amount" string="Monto"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
