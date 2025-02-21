@@ -1,4 +1,9 @@
 <odoo>
+    <record id="action_tenders_contact_us" model="ir.actions.act_url">
+        <field name="name">Contact us</field>
+        <field name="target">self</field>
+        <field name="url">/contactus</field>
+    </record>
     <menuitem id="menu_licitaciones_root" name="Licitaciones" sequence="10" web_icon="licitaciones/static/description/icon.png"/>
     <menuitem id="menu_licitaciones" name="Gestión de Licitaciones" parent="menu_licitaciones_root" action="action_licitacion" sequence="20"/> 
     <menuitem id="menu_contratantes" name="Contratantes" parent="menu_licitaciones_root" action="action_buyer" sequence="30"/>
@@ -8,4 +13,6 @@
     <menuitem id="menu_licitaciones_favorites" name="Favoritos" parent="menu_licitaciones_root"  action="action_favorites" sequence="50"/>
     <!-- Menú del Tablero -->
     <menuitem id="menu_licitaciones_dashboard" name="Tablero de Licitaciones" parent="menu_licitaciones_root" action="board.open_board_my_dash_action" sequence="60"/>
+    <menuitem id="menu_tenders_contact_us" name="Contactanos" parent="mail.menu_root_discuss" sequence="5" action="tenders.action_tenders_contact_us"/>
+
 </odoo>
