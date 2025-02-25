@@ -2,7 +2,7 @@ from . import tenders_tenders
 from . import tenders_bidders
 from . import tenders_buyers
 from . import tenders_chronograms
-from . import tenders_documents
+# from . import tenders_documents
 from . import tenders_favorites
 from . import tenders_items
 from . import tenders_supplier

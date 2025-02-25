@@ -27,7 +27,7 @@ class TendersLicitacion(models.Model):
     version_seace = fields.Char(string='Versión SEACE')
     acciones = fields.Text(string='Acciones')
     monto_total = fields.Float(string="Monto Total")
-    documento_ids = fields.One2many('licitaciones.documento', 'licitacion_id', string="Documentos")
+    # documento_ids = fields.One2many('licitaciones.documento', 'licitacion_id', string="Documentos")
     postores_ids = fields.One2many('licitaciones.postores', 'licitacion_id', string="Postores")
     titulo = fields.Char(string="Título")
     categoria_principal = fields.Char(string="Categoría Principal")

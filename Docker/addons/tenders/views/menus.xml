@@ -15,4 +15,7 @@
     <menuitem id="menu_licitaciones_dashboard" name="Tablero de Licitaciones" parent="menu_licitaciones_root" action="board.open_board_my_dash_action" sequence="60"/>
     <menuitem id="menu_tenders_contact_us" name="Contactanos" parent="mail.menu_root_discuss" sequence="5" action="tenders.action_tenders_contact_us"/>
 
+    <record id="mail.menu_root_discuss" model="ir.ui.menu">
+        <field name="name">Mesa de ayuda</field>
+    </record>
 </odoo>

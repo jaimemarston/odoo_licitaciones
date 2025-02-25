@@ -120,7 +120,7 @@ class TendersFavorites(models.Model):
                                         <td style="padding: 10px; text-align: center;">
                                             {''.join(f'''
                                                 <a href="{url}">click aqui</a><br/>
-                                            ''' for url in tender.documento_ids.mapped("url"))}
+                                            ''' for url in tender.cronograma_ids.mapped("url"))}
                                         </td>
                                     </tr>
                                 ''' for tender in tenders)}

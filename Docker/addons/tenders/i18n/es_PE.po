@@ -1,0 +1,713 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tenders
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20250207\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-25 14:11+0000\n"
+"PO-Revision-Date: 2025-02-25 14:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__acciones
+msgid "Acciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_proveedor__categoria__bien
+msgid "Bien"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Buscar por:"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__buyers_ids
+msgid "Buyers"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__cantidad
+msgid "Cantidad"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__categoria_adquisicion
+msgid "Categoria de Adquisición"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__categoria_principal
+msgid "Categoría Principal"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__categoria
+msgid "Categoría de Servicio"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_buyer
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__buyer_id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__comprador_id
+msgid "Comprador"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_proveedor__categoria__consultoria
+msgid "Consultoría"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_url,name:tenders.action_tenders_contact_us
+msgid "Contact us"
+msgstr ""
+
+#. module: tenders
+#: model:ir.ui.menu,name:tenders.menu_tenders_contact_us
+msgid "Contactanos"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Contratante"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_buyer
+#: model:ir.ui.menu,name:tenders.menu_contratantes
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_form
+msgid "Contratantes"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__correo
+msgid "Correo Electrónico"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__correo
+msgid "Correos Electrónicos"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__create_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__create_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_cronograma
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__cronograma_ids
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_form
+msgid "Cronograma"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__codigo_snip
+msgid "Código SNIP"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__codigo_unico_inversion
+msgid "Código Único de Inversión"
+msgstr ""
+
+#. module: tenders
+#. odoo-python
+#: code:addons/tenders/models/tenders_favorites.py:0
+msgid ""
+"Debe agregar al menos una de los siguentes campos: Palabras claves, Monto "
+"inicial, Monto tope"
+msgstr ""
+
+#. module: tenders
+#. odoo-python
+#: code:addons/tenders/models/tenders_favorites.py:0
+msgid "Debe agregar correos electronicos para enviar las licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__descripcion
+msgid "Descripción"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__clasificacion_descripcion
+msgid "Descripción Clasificación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__descripcion_objeto
+msgid "Descripción de Objeto"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__estado_detalle
+msgid "Detalle del Estado"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__direccion
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__direccion
+msgid "Dirección"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__display_name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__distrito
+msgid "Distrito"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__duracion_dias
+msgid "Duración en Días"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_licitacion__moneda__usd
+msgid "Dólares"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__emails_ids
+msgid "Emails"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__clasificacion_esquema
+msgid "Esquema Clasificación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__estado
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__ganador_estado
+msgid "Estado"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_favorites
+#: model:ir.model,name:tenders.model_licitaciones_emails_favorites
+#: model:ir.model,name:tenders.model_licitaciones_favorites
+#: model:ir.ui.menu,name:tenders.menu_licitaciones_favorites
+msgid "Favoritos"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_buyer_form
+#: model_terms:ir.ui.view,arch_db:tenders.view_proveedor_form
+msgid "Fecha"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__fecha_fin
+msgid "Fecha de Fin"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__fecha_inicio
+msgid "Fecha de Inicio"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Fecha de Publicación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__fecha_publicacion
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__fecha_publicacion
+msgid "Fecha y Hora de Publicación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__ganador
+msgid "Ganador"
+msgstr ""
+
+#. module: tenders
+#: model:ir.ui.menu,name:tenders.menu_licitaciones
+msgid "Gestión de Licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_licitacion_graph
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_graph
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitaciones_dashboard
+msgid "Gráfico de Licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__id
+msgid "ID"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__clasificacion_id
+msgid "ID Clasificación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__name
+msgid "ID Cronograma"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__id_licitacion
+msgid "ID Licitación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__postores_id
+msgid "ID Postor"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__unidad_id
+msgid "ID Unidad de Medida"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__id_item
+msgid "ID Ítem"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,help:tenders.field_licitaciones_favorites__correo
+msgid "Ingrese múltiples correos separados por comas."
+msgstr ""
+
+#. module: tenders
+#. odoo-python
+#: code:addons/tenders/models/tenders_emails_favorites.py:0
+msgid ""
+"La dirección de correo no cumple con el formato estándar "
+"'ejemplo@ejemplo.com' "
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__write_uid
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__write_date
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__tender_id
+msgid "Licitacion"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_licitacion
+#: model:ir.ui.menu,name:tenders.menu_licitaciones_root
+#: model_terms:ir.ui.view,arch_db:tenders.view_buyer_form
+msgid "Licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_licitacion
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__licitacion_id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__licitacion_id
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__licitacion_id
+msgid "Licitación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_licitacion_list
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitaciones_dashboard
+msgid "Lista de Licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__localidad
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__localidad
+msgid "Localidad"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__metodo_adquisicion
+msgid "Metodo de Adquisición"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__moneda
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__moneda
+msgid "Moneda"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_buyer_form
+msgid "Monto"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__montoinicial
+msgid "Monto Inicial (S/)"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__montotope
+msgid "Monto Tope (S/)"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__monto_total
+msgid "Monto Total"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Monto Total mayor a"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Monto Total menor a"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__nombre
+#: model_terms:ir.ui.view,arch_db:tenders.view_proveedor_tree
+msgid "Nombre"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__unidad_nombre
+msgid "Nombre Unidad de Medida"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__name
+msgid "Nombre del Comprador"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__name
+msgid "Nombre del Proveedor"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__nomenclatura
+msgid "Nomenclatura"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__objeto_contratacion
+msgid "Objeto de Contratación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_proveedor__categoria__obra
+msgid "Obra"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__observaciones
+msgid "Observaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__claves
+msgid "Palabras clave"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitaciones_dashboard
+msgid "Panel de Control"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_proveedor_form
+msgid "Participaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__pais
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__pais
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__pais
+msgid "País"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Periodo"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__posicion
+msgid "Posición"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Postor"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_proveedores
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__postores_ids
+#: model:ir.ui.menu,name:tenders.menu_proveedores
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_form
+msgid "Postores"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_proveedor
+msgid "Proveedor"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__ruc
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__ruc
+msgid "RUC"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__region
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__region
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__region
+msgid "Región"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__reiniciado_desde
+msgid "Reiniciado Desde"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__restricciones
+msgid "Restricciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__rol
+msgid "Rol"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_favorites_form
+msgid "Send"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_proveedor__categoria__servicio
+msgid "Servicio"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_licitacion__moneda__pen
+msgid "Soles"
+msgstr ""
+
+#. module: tenders
+#: model:ir.actions.act_window,name:tenders.action_licitaciones_dashboard
+#: model:ir.ui.menu,name:tenders.menu_licitaciones_dashboard
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitaciones_dashboard
+msgid "Tablero de Licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__telefono
+msgid "Teléfono"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__tipo_documento
+msgid "Tipo de Documento"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_tiposervicio
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_favorites__tiposervicio_ids
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_tiposervicio__name
+msgid "Tipo de Servicio"
+msgstr ""
+
+#. module: tenders
+#. odoo-python
+#: code:addons/tenders/models/tenders_favorites.py:0
+msgid "Tus licitaciones"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__title
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__titulo
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_search
+msgid "Título"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_cronograma__url
+msgid "URL"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__valor_referencial
+msgid "Valor Referencial"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_item__valor_total
+msgid "Valor Total"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__version_seace
+msgid "Versión SEACE"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__amount
+msgid "amount"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_proveedor__bidders_ids
+msgid "bidders"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__tender_date
+msgid "date_public"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__email
+msgid "email"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_buyer_pivot
+msgid "licitaciones.buyer.pivot"
+msgstr ""
+
+#. module: tenders
+#: model_terms:ir.ui.view,arch_db:tenders.view_buyer_form
+msgid "licitación"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__name
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_emails_favorites__name
+msgid "name"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_postores
+msgid "postores"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_postores__supplier_id
+msgid "supplier"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer__tender_ids
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__tender_name
+msgid "tender"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__total_items
+msgid "total items"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model,name:tenders.model_licitaciones_item
+msgid "Ítem"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__item_ids
+#: model_terms:ir.ui.view,arch_db:tenders.view_licitacion_form
+msgid "Ítems"
+msgstr ""
+
+#. module: tenders
+#: model:ir.model.fields.selection,name:tenders.selection__licitaciones_postores__ganador_estado__ganador
+msgid "🏆 Ganador"
+msgstr ""
+
+
+#. module: mail
+#: model:ir.actions.client,name:mail.action_discuss
+#: model:ir.ui.menu,name:mail.mail_menu_technical
+#: model:ir.ui.menu,name:mail.menu_root_discuss
+#: model_terms:ir.ui.view,arch_db:mail.res_config_settings_view_form
+msgid "Discuss"
+msgstr "Mesa de ayuda"

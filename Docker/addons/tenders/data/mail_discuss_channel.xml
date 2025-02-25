@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="channel_support_tenders" model="discuss.channel">
+            <field name="name">Soporte al Cliente</field>
+            <field name="description">Soporte del sistema a los usuarios</field>
+            <field name="channel_type">channel</field>
+            <field name="group_ids" eval="[(6,0,[
+                ref('base.group_user'),
+            ])]"/>
+        </record>
+    
+    </data>
+    
+
+</odoo>

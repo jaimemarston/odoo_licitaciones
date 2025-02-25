@@ -63,7 +63,7 @@
                                     </list>
                                 </field>
                             </page>
-                            <page string="Documentos">
+                            <!-- <page string="Documentos">
                                 <field name="documento_ids">
                                     <list>
                                         <field name="id_documento" width="50px"/>
@@ -73,12 +73,13 @@
                                         <field name="fecha_publicacion"/>
                                     </list>
                                 </field>
-                            </page>
+                            </page> -->
                             <page string="Cronograma">
                                 <field name="cronograma_ids">
                                     <list>
-                                        <field name="tipo_periodo"/>
+                                        <field name="title" />
                                         <field name="fecha_inicio"/>
+                                        <field name="url" />
                                         <field name="fecha_fin"/>
                                         <field name="duracion_dias"/>
                                     </list>
