@@ -13,7 +13,7 @@
                     <field name="fecha_publicacion"/>
                     <field name="objeto_contratacion"/>
                     <field name="monto_total"/>
-                    <field name="comprador_id"/>
+                    <field name="buyer_id" string="comprador"/>
                     <field name="total_items" />
                 </list>
             </field>
@@ -48,12 +48,13 @@
                             <field name="descripcion_objeto"/>
                             <field name="monto_total"/>
                             <field name="moneda"/>
-                            <field name="comprador_id" invisible="1"/>
-                            <field name="buyers_ids" widget="many2many_tags" string="Contratantes"/>
+                            <!-- <field name="buyers_ids" widget="many2many_tags" string="Contratantes"/> -->
+                            <field name="buyer_id" string="Comprador"/>
+                            <field name="bidder_winner" invisible="1"/>
                         </group>
                         <notebook>
                             <page string="Ítems">
-                                <field name="item_ids">
+                                <field name="item_ids" readonly="1">
                                     <list>
                                         <field name="id_item"/>
                                         <field name="descripcion"/>
@@ -75,18 +76,18 @@
                                 </field>
                             </page> -->
                             <page string="Cronograma">
-                                <field name="cronograma_ids">
+                                <field name="cronograma_ids" readonly="1">
                                     <list>
-                                        <field name="title" />
+                                        <field name="title" string="Etapa"/>
                                         <field name="fecha_inicio"/>
-                                        <field name="url" />
                                         <field name="fecha_fin"/>
-                                        <field name="duracion_dias"/>
+                                        <field name="url" string="Archivo"/>
+                                        <!-- <field name="duracion_dias"/> -->
                                     </list>
                                 </field>
                             </page>
                             <page string="Postores">
-                                <field name="postores_ids">
+                                <field name="postores_ids" readonly="1">
                                     <list>
                                         <field name="ruc"/>
                                         <field name="nombre"/>
@@ -107,13 +108,15 @@
             <field name="arch" type="xml">
                 <search string="Buscar por: ">
                     <!-- <field name="id_licitacion" string="ID Licitación"/> -->
-                    <field name="titulo" string="Título"/>
+                    <!-- <field name="titulo" string="Título"/> -->
                     <field name="fecha_publicacion" string="Fecha de Publicación"/>
                     <!-- <field name="objeto_contratacion" string="Objeto de Contratación"/> -->
                     <field name="monto_total" string="Monto Total menor a" filter_domain="[('monto_total', '&lt;=', self)]"/>
                     <field name="monto_total" string="Monto Total mayor a" filter_domain="[('monto_total', '&gt;=', self)]"/>
-                    <field name="buyers_ids" string="Contratante"/>
+                    <field name="buyer_id" string="Contratante"/>
                     <field name="postores_ids" string="Postor"/>
+                    <field name="objeto_contratacion" string="Objeto de contratación"/>
+                    <field name="item_ids" string="Items" filter_domain="[('item_ids.id_item', 'ilike', self)]"/>
                     <filter name="filter_date" date="fecha_publicacion" string="Periodo" />
                 </search>
             </field>

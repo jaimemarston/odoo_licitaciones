@@ -22,6 +22,12 @@
                         <!-- <field name="correo"/> -->
                         <field name="emails_ids" widget="many2many_tags"/>
                     </group>
+
+                    <notebook>
+                        <page name="tenders" string="Licitaciones">
+                            <field name="tenders_ids" />
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

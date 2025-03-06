@@ -9,7 +9,7 @@ class TendersLicitacion(models.Model):
     _rec_name = 'id_licitacion'
 
     id_licitacion = fields.Char(string="ID Licitación", required=True)
-    comprador_id = fields.Many2one('licitaciones.buyer', string="Comprador")
+    # comprador_id = fields.Many2one('licitaciones.buyer', string="Comprador")
     fecha_publicacion = fields.Datetime(string='Fecha y Hora de Publicación', required=True)
     nomenclatura = fields.Char(string='Nomenclatura')
     reiniciado_desde = fields.Char(string='Reiniciado Desde')
@@ -35,8 +35,10 @@ class TendersLicitacion(models.Model):
     cronograma_ids = fields.One2many('licitaciones.cronograma', 'licitacion_id', string="Cronograma")
 
     total_items = fields.Char(compute='_compute_total_items', string='total items', store=True)
-    buyers_ids = fields.One2many('licitaciones.buyer.pivot', 'tender_id', string='Buyers')
-
+    # buyers_ids = fields.One2many('licitaciones.buyer.pivot', 'tender_id', string='Buyers')
+    buyer_id = fields.Many2one('licitaciones.buyer', string='buyer')
+    bidder_winner = fields.Many2one('licitaciones.postores', string="Ganador")
+    
     @api.depends('fecha_inicio', 'fecha_fin')
     def _compute_duracion_dias(self):
         for record in self:

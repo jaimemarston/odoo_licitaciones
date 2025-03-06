@@ -48,10 +48,12 @@
 
                         <notebook>
                             <page string="Participaciones">
-                                <field name="bidders_ids">
+                                <field name="bidders_ids" readonly="1">
                                     <list>
                                         <field name="licitacion_id" />
+                                        <field name="titulo" />
                                         <field name="fecha_publicacion" string="Fecha"/>
+                                        <field name="monto_total" />
                                         <field name="ganador_estado" />
                                     </list>
                                 </field>

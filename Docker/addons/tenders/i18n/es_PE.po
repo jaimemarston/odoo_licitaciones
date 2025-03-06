@@ -58,7 +58,6 @@ msgstr ""
 #. module: tenders
 #: model:ir.model,name:tenders.model_licitaciones_buyer
 #: model:ir.model.fields,field_description:tenders.field_licitaciones_buyer_pivot__buyer_id
-#: model:ir.model.fields,field_description:tenders.field_licitaciones_licitacion__comprador_id
 msgid "Comprador"
 msgstr ""
 

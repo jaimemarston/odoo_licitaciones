@@ -21,6 +21,22 @@ class TendersFavorites(models.Model):
     correo = fields.Char(string="Correos Electrónicos", help="Ingrese múltiples correos separados por comas.")
 
     emails_ids = fields.Many2many('licitaciones.emails.favorites', string='Emails')
+    tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders')
+
+    @api.onchange('claves')
+    def _onchange_claves(self):
+        if self.claves or self.montoinicial or self.montotope:
+            domain = self.get_domain_tenders()
+            if not domain:
+                raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
+                
+            tenders_ids = self.env['licitaciones.licitacion'].search(domain)
+            if not tenders_ids:
+                self.tenders_ids = [(6, 0, [])]
+                return
+            self.tenders_ids = [(6, 0, tenders_ids.ids)]
+
+
 
     @api.constrains('correo')
     def _check_correo(self):
@@ -115,7 +131,7 @@ class TendersFavorites(models.Model):
                                 {''.join(f'''
                                     <tr>
                                         <td style="padding: 10px; text-align: center;">{tender.id_licitacion}</td>
-                                        <td style="padding: 10px; text-align: center;">{tender.comprador_id.name}</td>
+                                        <td style="padding: 10px; text-align: center;">{tender.buyer_id.name}</td>
                                         <td style="padding: 10px; text-align: center;">{tender.monto_total}</td>
                                         <td style="padding: 10px; text-align: center;">
                                             {''.join(f'''
