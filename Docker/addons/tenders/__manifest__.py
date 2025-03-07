@@ -17,6 +17,7 @@
         'views/buyer_views.xml',
         'views/proveedor_views.xml',
         'views/menus.xml',
+        'data/ir_cron_data.xml',
     ],
     'images': ['static/description/icon.png'],
     'installable': True,

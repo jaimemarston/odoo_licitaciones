@@ -116,7 +116,7 @@
                     <field name="buyer_id" string="Contratante"/>
                     <field name="postores_ids" string="Postor"/>
                     <field name="objeto_contratacion" string="Objeto de contratación"/>
-                    <field name="item_ids" string="Items" filter_domain="[('item_ids.id_item', 'ilike', self)]"/>
+                    <field name="item_ids" string="Items" filter_domain="[('item_ids.descripcion', 'ilike', self)]"/>
                     <filter name="filter_date" date="fecha_publicacion" string="Periodo" />
                 </search>
             </field>

@@ -23,6 +23,12 @@ class TendersFavorites(models.Model):
     emails_ids = fields.Many2many('licitaciones.emails.favorites', string='Emails')
     tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders')
 
+    def send_massive_mails_favorites(self):
+        favorites = self.search([('claves', '!=', False), ('emails_ids', '!=', False)])
+        if favorites:
+            for favorite in favorites:
+                favorite.action_send_email()
+
     @api.onchange('claves')
     def _onchange_claves(self):
         if self.claves or self.montoinicial or self.montotope:
