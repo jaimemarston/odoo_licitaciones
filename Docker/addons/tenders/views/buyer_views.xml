@@ -44,7 +44,7 @@
                                 <field name="tender_ids" readonly="1">
                                     <list>
                                         <field name="id_licitacion" string="Licitación"/>
-                                        <field name="titulo" string="Titulo"/>
+                                        <field name="objeto_contratacion" string="Objeto de contratación"/>
                                         <field name="fecha_publicacion" string="Fecha"/>
                                         <field name="bidder_winner" string="Proveedor"/>   
                                         <field name="monto_total" string="Monto"/>

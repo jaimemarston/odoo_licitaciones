@@ -18,6 +18,9 @@
         'views/proveedor_views.xml',
         'views/menus.xml',
         'data/ir_cron_data.xml',
+
+        # TEMPLATES
+        'views/templates/tenders_template.xml',
     ],
     'images': ['static/description/icon.png'],
     'installable': True,

@@ -61,7 +61,7 @@ class TendersFavorites(models.Model):
         valid_fields = [self.claves, self.montoinicial, self.montotope]
         for field in valid_fields:
             if type(field) == str and field:
-                domain.extend([("titulo", "ilike", "%" + field + "%")])
+                domain.extend([("objeto_contratacion", "ilike", "%" + field + "%")])
             if type(field) == float and field:
                 domain.append(('monto_total','>=' if field == self.montoinicial else '<=', field))
         return domain
@@ -76,13 +76,28 @@ class TendersFavorites(models.Model):
                 raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
             
             tenders_ids = self.env['licitaciones.licitacion'].search(domain)
-            if tenders_ids:
-                for favorite in record.emails_ids:
-
-                    values_mail = self.generate_mail_template(tenders=tenders_ids,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
-                    mail = self.env['mail.mail'].sudo().create(values_mail)
+            for favorite in record.emails_ids:
+                if not tenders_ids:
+                    phrases_ids = self.env['tenders.mail.phrases.message'].search([])
+                    phrase = phrases_ids[0]._get_random_phrases() if phrases_ids else ""
+                    values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email) 
+                    mail = self.env['mail.mail'].sudo().create(values_mail)   
                     mail.send()
+                    return
 
+                # values_mail = self.generate_mail_template(tenders=tenders_ids,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
+                base_url = self.obtener_url_base()
+                url =  base_url + f'/favoritos/{record.id}' if base_url else ""
+                values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
+                mail = self.env['mail.mail'].sudo().create(values_mail)
+                mail.send()
+    def obtener_url_base(self):
+        website = self.env['website'].get_current_website()
+        if website:
+            base_url = website.get_base_url()
+            return base_url
+        else:
+            return False
 
     def generate_mail_template(self, tenders, email_from, email_to):
         user_lang = self.env.lang or 'en_US'
@@ -122,7 +137,7 @@ class TendersFavorites(models.Model):
                             Estimado(a) Usuario,
                         </p>
                         <p>
-                            Te presentamos las licitaciones que coinciden con tus criterios de búsqueda.
+                            Hemos detectado las sigueintes licitaciones según tus palabras claves.
                         </p>
                         <table>
                             <thead>
@@ -150,6 +165,128 @@ class TendersFavorites(models.Model):
                         </table>
                         <p>
                             Esperamos que esta información te sea útil. Si tienes alguna pregunta, no dudes en contactarnos.
+                        </p>
+                        <p>
+                            Atentamente,
+                        </p>
+                        <p>
+                            El equipo de {self.env.company.name}
+                        </p>
+                    </div>
+                </div>
+                </body>
+                </html>
+            """,
+            'email_to': email_to,
+            'email_from': email_from,
+        }
+        return mail_values
+    
+    def generate_for_website_mail_template(self, url, email_from, email_to):
+        user_lang = self.env.lang or 'en_US'
+        mail_values = {
+            'subject': self.with_context(lang=user_lang).env._('Tus licitaciones'),
+            'body_html': f"""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <style>
+                    /* ... (Estilos CSS existentes) ... */
+                    table {{
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }}
+                    th, td {{
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }}
+                    th {{
+                        background-color: #f2f2f2;
+                        font-weight: bold;
+                    }}
+                </style>
+                </head>
+                <body>
+                <div class="email-container">
+                    <div style="margin: 0px; padding: 0px; background-color: #de99cc; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                        <h2 style="margin: 0px; padding: 0px; font-size: 16px; text-align: center; color: #ffffff;">
+                            Licitaciones de tus favoritos
+                        </h2>
+                    </div>
+                    <div style="margin: 10px; padding: 10px; background-color: #FFFFFF; border-radius: 3px;">
+                        <p>
+                            Estimado(a) Usuario,
+                        </p>
+                        <p>
+                            Hemos detectado las sigueintes licitaciones según tus palabras claves.
+                        </p>
+                        <p>
+                            Enlace: <a href="{url}">click aqui!</a>
+                        </p> 
+                        <p>
+                            Recuerda: Revisa los documentos con anticipación y asegúrate de cumplir con los requisitos antes de la fecha límite.
+                        </p>
+                        <p>
+                            Esperamos que esta información te sea útil. Si tienes alguna pregunta, no dudes en contactarnos.
+                        </p>
+                        <p>
+                            Atentamente,
+                        </p>
+                        <p>
+                            El equipo de {self.env.company.name}
+                        </p>
+                    </div>
+                </div>
+                </body>
+                </html>
+            """,
+            'email_to': email_to,
+            'email_from': email_from,
+        }
+        return mail_values
+    
+
+    def generate_for_website_mail_danger_template(self, message, email_from, email_to):
+        user_lang = self.env.lang or 'en_US'
+        mail_values = {
+            'subject': self.with_context(lang=user_lang).env._('Tus licitaciones'),
+            'body_html': f"""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <style>
+                    /* ... (Estilos CSS existentes) ... */
+                    table {{
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }}
+                    th, td {{
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }}
+                    th {{
+                        background-color: #f2f2f2;
+                        font-weight: bold;
+                    }}
+                </style>
+                </head>
+                <body>
+                <div class="email-container">
+                    <div style="margin: 0px; padding: 0px; background-color: #de99cc; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                        <h2 style="margin: 0px; padding: 0px; font-size: 16px; text-align: center; color: #ffffff;">
+                            Licitaciones de tus favoritos
+                        </h2>
+                    </div>
+                    <div style="margin: 10px; padding: 10px; background-color: #FFFFFF; border-radius: 3px;">
+                        <p>
+                            Estimado(a) Usuario,
+                        </p>
+                        <p>
+                            {message}
                         </p>
                         <p>
                             Atentamente,

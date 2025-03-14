@@ -4,7 +4,7 @@
         <field name="target">self</field>
         <field name="url">/contactus</field>
     </record>
-    <menuitem id="menu_licitaciones_root" name="Licitaciones" sequence="10" web_icon="licitaciones/static/description/icon.png"/>
+    <menuitem id="menu_licitaciones_root" name="Licitaciones" sequence="10" web_icon="tenders,static/description/icon.png"/>
     <menuitem id="menu_licitaciones" name="Gestión de Licitaciones" parent="menu_licitaciones_root" action="action_licitacion" sequence="20"/> 
     <menuitem id="menu_contratantes" name="Contratantes" parent="menu_licitaciones_root" action="action_buyer" sequence="30"/>
     <!-- Menú para Proveedores -->
