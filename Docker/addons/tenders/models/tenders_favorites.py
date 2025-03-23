@@ -22,6 +22,9 @@ class TendersFavorites(models.Model):
 
     emails_ids = fields.Many2many('licitaciones.emails.favorites', string='Emails')
     tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders')
+    words_ids = fields.Many2many('tender.word.favorites', string='words')
+    date_start = fields.Datetime('date start')
+    date_end = fields.Datetime('date end')
 
     def send_massive_mails_favorites(self):
         favorites = self.search([('claves', '!=', False), ('emails_ids', '!=', False)])
@@ -29,9 +32,11 @@ class TendersFavorites(models.Model):
             for favorite in favorites:
                 favorite.action_send_email()
 
-    @api.onchange('claves')
-    def _onchange_claves(self):
-        if self.claves or self.montoinicial or self.montotope:
+    @api.onchange('words_ids', 'montoinicial', 'montotope', 'date_start', 'date_end')
+    def _onchange_words_ids(self):
+        logging.info('\n' * 2)
+        logging.info('in ochange')
+        if self.words_ids or self.montoinicial or self.montotope:
             domain = self.get_domain_tenders()
             if not domain:
                 raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
@@ -56,14 +61,49 @@ class TendersFavorites(models.Model):
                     if not email_regex.match(email):
                         raise ValidationError(f"El correo '{email}' no tiene un formato válido.")
     
+    # def get_domain_tenders(self):
+    #     logging.info('\n' * 3)
+    #     logging.info('en domaiiiiin')
+    #     domain = []
+    #     valid_fields = [self.words_ids, self.montoinicial, self.montotope, self.date_start, self.date_end]
+    #     for field in valid_fields:
+    #         logging.info(field)
+    #         if not field:
+    #             logging.info('fiel no rellenado %s' % str(field))
+    #             continue
+    #         if field == self.words_ids:
+    #             keys = field.mapped('name')
+    #             logging.info(keys)
+    #             domain = ['|'] * (len(keys) - 1) if keys else []
+    #             for key in keys:
+    #                 domain.extend([("objeto_contratacion", "ilike", "%" + key + "%")])
+    #                 continue
+                
+    #         if type(field) == float:
+    #             domain.append(('monto_total','>=' if field == self.montoinicial else '<=', field))
+    #         logging.info(type(field))
+    #     return domain
+    
     def get_domain_tenders(self):
+        logging.info('\n' * 3 + 'en domain')
         domain = []
-        valid_fields = [self.claves, self.montoinicial, self.montotope]
-        for field in valid_fields:
-            if type(field) == str and field:
-                domain.extend([("objeto_contratacion", "ilike", "%" + field + "%")])
-            if type(field) == float and field:
-                domain.append(('monto_total','>=' if field == self.montoinicial else '<=', field))
+        if self.words_ids:
+            keys = self.words_ids.mapped('name')
+            domain.extend([('objeto_contratacion', 'ilike', f"%{key}%") for key in keys])
+            if len(keys) > 1:
+                domain = ['|'] * (len(keys) - 1) + domain
+        if self.montoinicial:
+            domain.append(('monto_total', '>=', self.montoinicial))
+        if self.montotope:
+            logging.info(self.montotope)
+            domain.append(('monto_total', '<=', self.montotope))
+        
+        if self.date_start:
+            domain.append(('fecha_publicacion', '>=', self.date_start))
+
+        if self.date_end:
+            domain.append(('fecha_publicacion', '<=', self.date_end))
+        logging.info(f"Domain construido: {domain}")
         return domain
 
     def action_send_email(self):
@@ -209,13 +249,13 @@ class TendersFavorites(models.Model):
                 </style>
                 </head>
                 <body>
-                <div class="email-container">
-                    <div style="margin: 0px; padding: 0px; background-color: #de99cc; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                <div class="email-container container">
+                    <div style="margin: 0px; padding: 0px; background-color: #14212e; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
                         <h2 style="margin: 0px; padding: 0px; font-size: 16px; text-align: center; color: #ffffff;">
                             Licitaciones de tus favoritos
                         </h2>
                     </div>
-                    <div style="margin: 10px; padding: 10px; background-color: #FFFFFF; border-radius: 3px;">
+                    <div style="background-color: #FFFFFF; border-radius: 3px;">
                         <p>
                             Estimado(a) Usuario,
                         </p>
@@ -225,6 +265,26 @@ class TendersFavorites(models.Model):
                         <p>
                             Enlace: <a href="{url}">click aqui!</a>
                         </p> 
+                        <div class="row">
+                            <div class="panel panel-primary filterable">
+                                <div id="wrap" class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center; padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2;">Objeto contratación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {''.join(f'''
+                                                <tr>
+                                                    <td style="padding: 10px; text-align: center;">{tender.objeto_contratacion}</td>
+                                                </tr>
+                                            ''' for tender in self.tenders_ids)}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <p>
                             Recuerda: Revisa los documentos con anticipación y asegúrate de cumplir con los requisitos antes de la fecha límite.
                         </p>

@@ -12,13 +12,16 @@
                 <sheet>
                     <group>
                         <field name="claves"/>
-                        <field name="restricciones"/>
+                        <field name="words_ids" string="Claves" widget="many2many_tags"/>
+                        <!-- <field name="restricciones"/> -->
                         <field name="montoinicial"/>
                         <field name="montotope"/>
-                        <field name="pais"/>
-                        <field name="region"/>
-                        <field name="distrito"/>
-                        <field name="tiposervicio_ids" widget="many2many_tags"/>
+                        <field name="date_start" string="Fecha desde" />
+                        <field name="date_end"  string="Fecha hasta"/>
+                        <!-- <field name="pais"/> -->
+                        <!-- <field name="region"/> -->
+                        <!-- <field name="distrito"/> -->
+                        <!-- <field name="tiposervicio_ids" widget="many2many_tags"/> -->
                         <!-- <field name="correo"/> -->
                         <field name="emails_ids" widget="many2many_tags" required="1"/>
                     </group>

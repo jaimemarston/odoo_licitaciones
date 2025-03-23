@@ -10,3 +10,4 @@ from . import tenders_types_services
 from . import tenders_emails_favorites
 # from . import tenders_buyers_pivot
 from . import tender_mail_phrases_message
+from . import tender_word_favorites
