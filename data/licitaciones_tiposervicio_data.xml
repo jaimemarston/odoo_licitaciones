@@ -1,0 +1,14 @@
+<odoo>
+    <record id="tiposervicio_bien" model="licitaciones.tiposervicio">
+        <field name="name">Bien</field>
+    </record>
+    <record id="tiposervicio_servicio" model="licitaciones.tiposervicio">
+        <field name="name">Servicio</field>
+    </record>
+    <record id="tiposervicio_obra" model="licitaciones.tiposervicio">
+        <field name="name">Obra</field>
+    </record>
+    <record id="tiposervicio_consultoria" model="licitaciones.tiposervicio">
+        <field name="name">Consultoría</field>
+    </record>
+</odoo>

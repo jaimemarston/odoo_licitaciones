@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="ir_cron_massive_send_mails_favorites" model="ir.cron">
+            <field name="name">Mssive send mails to favorites</field>
+            <field name="model_id" ref="model_licitaciones_favorites"/>
+            <field name="code">model.send_massive_mails_favorites()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="state">code</field>
+            <field name="active" eval="True"/>
+        </record>
+    
+    </data>
+    
+
+</odoo>
