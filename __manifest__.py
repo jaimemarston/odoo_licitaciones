@@ -16,6 +16,7 @@
         'views/favorites_views.xml',
         'views/buyer_views.xml',
         'views/proveedor_views.xml',
+        'views/wizard_licitacion_filter.xml',
         'views/menus.xml',
         'data/ir_cron_data.xml',
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vista del wizard -->
+    <record id="view_wizard_licitacion_filter_form" model="ir.ui.view">
+        <field name="name">wizard.licitacion.filter.form</field>
+        <field name="model">licitaciones.filter.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Filtrar Licitaciones">
+                <group>
+                    <field name="fecha_inicio"/>
+                    <field name="fecha_fin"/>
+                    <field name="monto_minimo"/>
+                </group>
+                <footer>
+                    <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>
+                    <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción del wizard -->
+    <record id="action_wizard_licitacion_filter" model="ir.actions.act_window">
+        <field name="name">Filtrar Licitaciones</field>
+        <field name="res_model">licitaciones.filter.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_name': 'Filtrar Licitaciones'}</field>
+        <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+                </p><p>
+                OpenERP helps you easily track all activities related to
+                a customer; discussions, history of business opportunities,
+                documents, etc.
+                </p>
+        </field>
+    </record>
+    
+    <record id="action_open_filter_wizard_auto" model="ir.actions.server">
+        <field name="name">Abrir Filtro de Licitaciones</field>
+        <field name="model_id" ref="model_licitaciones_licitacion"/>
+        <field name="binding_model_id" ref="model_licitaciones_licitacion"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                'type': 'ir.actions.act_window',
+                'res_model': 'licitaciones.filter.wizard',
+                'view_mode': 'form',
+                'target': 'new',
+                'name': '🎯 Filtrar Licitaciones',
+            }
+        </field>
+    </record>
+
+</odoo>
