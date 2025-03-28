@@ -13,7 +13,7 @@
             <field name="name">proveedor.list</field>
             <field name="model">licitaciones.proveedor</field>
             <field name="arch" type="xml">
-                <list>
+                <list create="0" edit="0">
                     <field name="name" string="Nombre"/>
                     <field name="ruc"/>
                 </list>
@@ -25,7 +25,10 @@
             <field name="name">proveedor.form</field>
             <field name="model">licitaciones.proveedor</field>
             <field name="arch" type="xml">
-                <form>
+                <form create="0" edit="0">
+                    <header>
+                        <button string="Crear Usuario" name="action_open_wizard_supplier_users" type="object" class="oe_highlight" groups="base.group_system"/>
+                    </header>
                     <sheet>
                         <group>
                             <field name="name"/>

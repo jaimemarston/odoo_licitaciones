@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_filtered_competence_server" model="ir.actions.server">
+        <field name="name">Mostrar Registros Filtrados</field>
+        <field name="model_id" ref="model_licitaciones_proveedor"/>
+        <field name="binding_model_id" ref="tenders.model_licitaciones_proveedor"/>
+        <field name="state">code</field>
+        <field name="code">action = model.accion_mostrar_registros_filtrados()</field>
+    </record>
+
+    <!-- <record id="menu_mostrar_registros_filtrados" model="ir.ui.menu">
+        <field name="name">Registros Filtrados</field>
+        <field name="action" ref="action_filtered_competence_server"/>
+        <field name="parent" ref="menu_tenders_competence"/> # Reemplaza main_menu con el menú padre deseado.
+    </record> -->
+</odoo>
