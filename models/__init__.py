@@ -12,3 +12,4 @@ from . import tenders_emails_favorites
 from . import tender_mail_phrases_message
 from . import tender_word_favorites
 from . import wizard_licitacion_filter
+from . import wizard_buyer_filter
