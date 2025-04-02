@@ -51,3 +51,9 @@ class TendersProveedor(models.Model):
             'view_mode': 'list',
             'domain': [('id', 'in', competence.ids)],
         }
+    
+    search_participacion = fields.Char(string="Buscar Participación", compute="_compute_search")
+
+    def _compute_search(self):
+        for record in self:
+            record.search_participacion = ""

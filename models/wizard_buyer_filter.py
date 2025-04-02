@@ -19,3 +19,13 @@ class BuyerFilterWizard(models.TransientModel):
             'domain': domain,
             'target': 'current',
         }
+
+    def action_cancelar(self):
+        """Redirecciona a la vista de licitaciones al cancelar el wizard"""
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Licitaciones',
+            'res_model': 'licitaciones.licitacion',
+            'view_mode': 'list,form',
+            'target': 'main',  # Cambiado a 'main' para evitar acumulación de pestañas
+        }

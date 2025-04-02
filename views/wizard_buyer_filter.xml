@@ -12,7 +12,7 @@
                     </group>
                     <footer>
                         <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>
-                        <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                        <button string="Cancelar" type="object" name="action_cancelar" class="btn-secondary"/>
                     </footer>
                 </form>
             </field>
