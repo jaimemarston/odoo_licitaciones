@@ -12,6 +12,7 @@
                         <group>
                             <field name="supplier_id" invisible="1"/>
                             <field name="login" string="Usuario"/>
+                            <field name="email" string="Correo electrónico"/>
                             <field name="password" string="Contraseña"/>
                         </group>
                     </sheet>

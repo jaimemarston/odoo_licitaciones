@@ -25,7 +25,7 @@
             <field name="name">proveedor.form</field>
             <field name="model">licitaciones.proveedor</field>
             <field name="arch" type="xml">
-                <form create="0" edit="0">
+                <form create="0" edit="1">
                     <header>
                         <button string="Crear Usuario" name="action_open_wizard_supplier_users" type="object" class="oe_highlight" groups="base.group_system"/>
                     </header>
@@ -36,8 +36,29 @@
                         </group>
 
                         <notebook>
-                            <page string="Participaciones">
+                            <page string="Participaciones" invisible="1">
                                 <field name="bidders_ids" readonly="1">
+                                    <list>
+                                        <field name="licitacion_id" />
+                                        <field name="titulo" />
+                                        <field name="fecha_publicacion" string="Fecha"/>
+                                        <field name="monto_total" />
+                                        <field name="ganador_estado" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Participaciones">
+                                <div>
+                                    <label for="title_filter">Filtro de Titulo</label>
+                                    <field name="title_filter" string="Filtro de Titulo"/>
+                                </div>
+                                <div>
+                                    <label for="date_filter">Filtro de Fecha</label>
+                                    <field name="date_filter" string="Filtro de Fecha"/>
+                                    hasta
+                                    <field name="end_date_filter" />
+                                </div>
+                                <field name="bidders_filter_ids">
                                     <list>
                                         <field name="licitacion_id" />
                                         <field name="titulo" />

@@ -6,5 +6,4 @@ class TenderWordFavorites(models.Model):
     
 
     name = fields.Char('name')
-
     

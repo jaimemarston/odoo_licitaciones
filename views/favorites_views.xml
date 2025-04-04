@@ -23,7 +23,9 @@
                         <!-- <field name="distrito"/> -->
                         <!-- <field name="tiposervicio_ids" widget="many2many_tags"/> -->
                         <!-- <field name="correo"/> -->
-                        <field name="emails_ids" widget="many2many_tags" required="1"/>
+                        <!-- <field name="emails_ids" widget="many2many_tags" required="1"/> -->
+                        <field name="user_id" />
+                        <field name="email" />
                     </group>
 
                     <notebook>
@@ -56,6 +58,7 @@
         <field name="name">Favoritos</field>
         <field name="res_model">licitaciones.favorites</field>
         <field name="view_mode">list,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
     </record>
 
 </odoo>

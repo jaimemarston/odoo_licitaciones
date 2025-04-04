@@ -7,7 +7,7 @@ class TendersFavorites(models.Model):
     _name = 'licitaciones.favorites'
     _description = 'Favoritos'
 
-    claves = fields.Char(string="Palabras clave", required=True)
+    claves = fields.Char(string="Palabras clave")
     restricciones = fields.Char(string="Restricciones")
     montoinicial = fields.Float(string="Monto Inicial (S/)", required=True)
     montotope = fields.Float(string="Monto Tope (S/)")
@@ -25,6 +25,8 @@ class TendersFavorites(models.Model):
     words_ids = fields.Many2many('tender.word.favorites', string='words')
     date_start = fields.Datetime('date start')
     date_end = fields.Datetime('date end')
+    user_id = fields.Many2one('res.users', string='user', default=lambda self: self.env.uid)
+    email = fields.Char('email', related='user_id.email')
 
     def send_massive_mails_favorites(self):
         favorites = self.search([('claves', '!=', False), ('emails_ids', '!=', False)])
@@ -49,7 +51,7 @@ class TendersFavorites(models.Model):
 
 
 
-    @api.constrains('correo')
+    @api.constrains('email')
     def _check_correo(self):
         """Valida que los correos estén en formato correcto y separados por comas."""
         email_regex = re.compile(r"[^@]+@[^@]+\.[^@]+")
@@ -108,7 +110,7 @@ class TendersFavorites(models.Model):
 
     def action_send_email(self):
         for record in self:
-            if not record.emails_ids:
+            if not record.email:
                 raise ValidationError(_("Debe agregar correos electronicos para enviar las licitaciones"))
             
             domain = record.get_domain_tenders()
@@ -116,11 +118,12 @@ class TendersFavorites(models.Model):
                 raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
             
             tenders_ids = self.env['licitaciones.licitacion'].search(domain)
-            for favorite in record.emails_ids:
+            # for favorite in record.emails_ids:
+            if record.email:
                 if not tenders_ids:
                     phrases_ids = self.env['tenders.mail.phrases.message'].search([])
                     phrase = phrases_ids[0]._get_random_phrases() if phrases_ids else ""
-                    values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email) 
+                    values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "noreply@company.com",email_to=record.email) 
                     mail = self.env['mail.mail'].sudo().create(values_mail)   
                     mail.send()
                     return
@@ -128,7 +131,7 @@ class TendersFavorites(models.Model):
                 # values_mail = self.generate_mail_template(tenders=tenders_ids,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
                 base_url = self.obtener_url_base()
                 url =  base_url + f'/favoritos/{record.id}' if base_url else ""
-                values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
+                values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "noreply@company.com",email_to=record.email)
                 mail = self.env['mail.mail'].sudo().create(values_mail)
                 mail.send()
     def obtener_url_base(self):
