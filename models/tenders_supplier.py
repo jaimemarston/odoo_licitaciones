@@ -1,7 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import re
-
+import datetime
+import logging
 
 class TendersProveedor(models.Model):
     _name = 'licitaciones.proveedor'
@@ -22,8 +23,12 @@ class TendersProveedor(models.Model):
         ('consultoria', 'Consultoría')
     ], string="Categoría de Servicio", required=True)
 
+    search_participacion = fields.Char(string="Buscar Participación", compute="_compute_search")
     bidders_ids = fields.One2many('licitaciones.postores', 'supplier_id', string='bidders')
-
+    title_filter = fields.Char('title_filter', store=False, readonly=False)
+    bidders_filter_ids = fields.Many2many('licitaciones.postores', string='bidders_filter', compute="_compute_bidders_filter")
+    date_filter = fields.Date('Date filter', store=False, readonly=False)
+    end_date_filter = fields.Date('Date filter', store=False, readonly=False)
     def action_open_wizard_supplier_users(self):
         return {
             'name': 'Crear Usuario',
@@ -51,8 +56,34 @@ class TendersProveedor(models.Model):
             'view_mode': 'list',
             'domain': [('id', 'in', competence.ids)],
         }
+
+    @api.depends('bidders_ids', 'title_filter', 'date_filter', 'end_date_filter')
+    def _compute_bidders_filter(self):
+        domain = []
+        if not self.bidders_ids:
+            return  False
+        if self.title_filter:
+            domain.append(('titulo', 'ilike', f"%{self.title_filter}%"))
+        if self.date_filter:
+            # end_datetime = datetime.datetime(
+            #         self.date_filter.year,
+            #         self.date_filter.month,
+            #         self.date_filter.day,
+            #         23, 59, 59
+            #     )
+            domain.append(('fecha_publicacion', '>=', self.date_filter))
+        if self.end_date_filter:
+            domain.append(('fecha_publicacion', '<=', self.end_date_filter))
+        
+        # bidders = self.bidders_ids.filtered(lambda bidder: bidder.titulo == self.title_filter)
+        if domain:
+            domain.append(('id', 'in', self.bidders_ids.ids))
+            bidders = self.bidders_ids.search(domain)
+            self.bidders_filter_ids = [(6,0,bidders.ids)]
+            return True
+        if not domain and self.bidders_ids:
+            self.bidders_filter_ids = self.bidders_ids.ids
     
-    search_participacion = fields.Char(string="Buscar Participación", compute="_compute_search")
 
     def _compute_search(self):
         for record in self:
