@@ -13,3 +13,4 @@ from . import tender_mail_phrases_message
 from . import tender_word_favorites
 from . import wizard_licitacion_filter
 from . import wizard_buyer_filter
+from . import wizard_supplier_filter

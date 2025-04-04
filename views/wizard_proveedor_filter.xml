@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vista del wizard para proveedores -->
+        <record id="view_wizard_supplier_filter_form" model="ir.ui.view">
+            <field name="name">wizard.supplier.filter.form</field>
+            <field name="model">licitaciones.supplier.filter.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Filtrar Proveedores">
+                    <group>
+                        <field name="name" string="Nombre del Proveedor"/>
+                        <field name="ruc" string="RUC del Proveedor"/>
+                    </group>
+                    <footer>
+                        <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>
+                        <button string="Cancelar" type="object" name="action_cancelar" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción del wizard para proveedores -->
+        <record id="action_wizard_supplier_filter" model="ir.actions.act_window">
+            <field name="name">Filtrar Proveedores</field>
+            <field name="res_model">licitaciones.supplier.filter.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Acción automática al abrir la vista de proveedores -->
+        <record id="action_open_filter_wizard_auto_supplier" model="ir.actions.server">
+            <field name="name">Abrir Filtro de Proveedores</field>
+            <field name="model_id" ref="model_licitaciones_proveedor"/>
+            <field name="binding_model_id" ref="model_licitaciones_proveedor"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'licitaciones.supplier.filter.wizard',
+                    'view_mode': 'form',
+                    'target': 'new',
+                    'name': '🎯 Filtrar Proveedores',
+                }
+            </field>
+        </record>
+    </data>
+</odoo>

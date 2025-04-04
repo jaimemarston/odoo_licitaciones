@@ -39,9 +39,6 @@
                         <notebook>
                             <page string="Participaciones">
                                 <!-- Campo de texto para búsqueda interactiva -->
-                                <group>
-                                    <field name="search_participacion" placeholder="Buscar Participación..." options="{'no_open': True}" string="Buscar"/>
-                                </group>
                                 <field name="bidders_ids" readonly="1">
                                     <list>
                                         <field name="licitacion_id" />
