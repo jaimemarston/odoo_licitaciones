@@ -44,6 +44,8 @@ class TendersLicitacion(models.Model):
         ('sin_items', 'Sin ítems activos')
     ], string="Estado del ítem", compute="_compute_estado_item", store=True)
 
+
+
     @api.depends('item_ids.estado')
     def _compute_estado_item(self):
         for rec in self:

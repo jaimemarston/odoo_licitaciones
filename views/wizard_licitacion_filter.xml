@@ -7,13 +7,18 @@
         <field name="arch" type="xml">
             <form string="Filtrar Licitaciones">
                 <group>
+                    <field name="contratante_id"/>
+                    <field name="postor_id"/>
+                    <field name="objetivo_contratacion"/>
+                    <field name="items"/>
+                    <field name="filtro_monto"/>
                     <field name="fecha_inicio"/>
                     <field name="fecha_fin"/>
-                    <field name="monto_minimo"/>
                 </group>
                 <footer>
                     <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>
-                    <button string="Cancelar" special="cancel" class="btn-secondary"/>
+                    <!-- <button string="Cancelar" special="cancel" class="btn-secondary"/> -->
+                    <button string="Cancelar" type="object" name="action_cancelar" class="btn-secondary"/>
                 </footer>
             </form>
         </field>
@@ -26,15 +31,6 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="context">{'default_name': 'Filtrar Licitaciones'}</field>
-        <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                Click to add a contact in your address book.
-                </p><p>
-                OpenERP helps you easily track all activities related to
-                a customer; discussions, history of business opportunities,
-                documents, etc.
-                </p>
-        </field>
     </record>
     
     <record id="action_open_filter_wizard_auto" model="ir.actions.server">

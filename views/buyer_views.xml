@@ -24,7 +24,7 @@
             <field name="name">buyer.form</field>
             <field name="model">licitaciones.buyer</field>
             <field name="arch" type="xml">
-                <form>
+                <form create="0"> 
                     <sheet>
                         <group>
                             <field name="name"/>

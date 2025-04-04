@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vista del wizard -->
+        <record id="view_wizard_buyer_filter_form" model="ir.ui.view">
+            <field name="name">wizard.buyer.filter.form</field>
+            <field name="model">licitaciones.buyer.filter.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Filtrar Compradores">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <footer>
+                        <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>
+                        <button string="Cancelar" type="object" name="action_cancelar" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción del wizard -->
+        <record id="action_wizard_buyer_filter" model="ir.actions.act_window">
+            <field name="name">Filtrar Compradores</field>
+            <field name="res_model">licitaciones.buyer.filter.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Acción automática al abrir la vista de compradores -->
+        <record id="action_open_filter_wizard_auto_buyer" model="ir.actions.server">
+            <field name="name">Abrir Filtro de Compradores</field>
+            <field name="model_id" ref="model_licitaciones_buyer"/>
+            <field name="binding_model_id" ref="model_licitaciones_buyer"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'licitaciones.buyer.filter.wizard',
+                    'view_mode': 'form',
+                    'target': 'new',
+                    'name': '🎯 Filtrar Compradores',
+                }
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -17,11 +17,12 @@
         'views/buyer_views.xml',
         'views/proveedor_views.xml',
         'views/wizard_licitacion_filter.xml',
+        'views/wizard_buyer_filter.xml',
+        'views/wizard_proveedor_filter.xml',
         'views/tenders_competence_views.xml',
         'views/menus.xml',
         'wizard/supplier_users_views.xml',
         'data/ir_cron_data.xml',
-
         # TEMPLATES
         'views/templates/tenders_template.xml',
     ],

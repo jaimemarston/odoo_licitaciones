@@ -23,6 +23,7 @@ class TendersProveedor(models.Model):
         ('consultoria', 'Consultoría')
     ], string="Categoría de Servicio", required=True)
 
+    search_participacion = fields.Char(string="Buscar Participación", compute="_compute_search")
     bidders_ids = fields.One2many('licitaciones.postores', 'supplier_id', string='bidders')
     title_filter = fields.Char('title_filter', store=False, readonly=False)
     bidders_filter_ids = fields.Many2many('licitaciones.postores', string='bidders_filter', compute="_compute_bidders_filter")
@@ -82,3 +83,8 @@ class TendersProveedor(models.Model):
             return True
         if not domain and self.bidders_ids:
             self.bidders_filter_ids = self.bidders_ids.ids
+    
+
+    def _compute_search(self):
+        for record in self:
+            record.search_participacion = ""

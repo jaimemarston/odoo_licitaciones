@@ -7,7 +7,7 @@
             <field name="name">licitacion.list</field>
             <field name="model">licitaciones.licitacion</field>
             <field name="arch" type="xml">
-                <list>
+                <list create="0">
                     <field name="id_licitacion"/>
                     <field name="titulo"/>
                     <field name="fecha_publicacion"/>
@@ -36,7 +36,7 @@
             <field name="name">licitacion.form</field>
             <field name="model">licitaciones.licitacion</field>
             <field name="arch" type="xml">
-                <form>
+                <form create="0">
                     <sheet>
                         <group>
                             <field name="id_licitacion"/>
@@ -81,7 +81,9 @@
                                         <field name="title" string="Etapa"/>
                                         <field name="fecha_inicio"/>
                                         <field name="fecha_fin"/>
-                                        <field name="url" string="Enlace Doc." widget="url" />
+                                        <!-- <field name="url" string="Enlace Doc." widget="url" />  -->
+                                        <field name="download_icon" widget="html" string="Descargar"/>
+
                                         <!-- <field name="duracion_dias"/> -->
                                     </list>
                                 </field>
@@ -136,24 +138,6 @@
             <field name="domain">[]</field>
             <field name="user_id" eval="False"/>
             <field name="context">{'group_by': ['fecha_publicacion:month']}</field>
-        </record>
-
-        <record id="filter_tenders_above_3UIT" model="ir.filters">
-            <field name="name">Mayor de 3 UIT</field>
-            <field name="model_id">licitaciones.licitacion</field>
-            <field name="domain">[('monto_total', '>', 14850)]</field>
-            
-            <field name="user_id" eval="False"/>
-        </record>
-        
-        <record id="filter_tenders_active" model="ir.filters">
-            <field name="name">Licitaciones Activas</field>
-            <field name="model_id">licitaciones.licitacion</field>
-            <!-- <field name="domain">[('monto_total', '=', 0), ('estado_item', '=', 'activo')]</field>-->
-            <field name="domain">[('monto_total', '=', 0)]</field>
-
-            <field name="user_id" eval="False"/>
-            <field name="is_default" eval="True"/>  <!-- Este campo lo establece como predeterminado -->
         </record>
 
     </data>

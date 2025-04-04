@@ -1,0 +1,5 @@
+.o_menu_header_navbar .dropdown-menu a[data-menu="documentation"],
+.o_menu_header_navbar .dropdown-menu a[data-menu="support"],
+.o_menu_header_navbar .dropdown-menu a[data-menu="shortcuts"] {
+    display: none !important;
+}
