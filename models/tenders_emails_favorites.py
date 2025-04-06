@@ -16,5 +16,5 @@ class TendersEmailsFavorites(models.Model):
         if self.email:
             email_normalized = tools.email_normalize(self.email)
             if not email_normalized:
-                raise ValidationError(_("La dirección de correo no cumple con el formato estándar 'ejemplo@ejemplo.com' "))
+                raise ValidationError(_("La dirección de correo no cumple con el formato estándar 'nombre@dominio.com' "))
             

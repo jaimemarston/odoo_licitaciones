@@ -31,7 +31,7 @@
     'application': True,
     'assets': {
         'web.assets_backend': [
-            'tenders/static/src/js/hide_call_buttons.js',
+            'tenders/static/src/js/**/*.*',
         ],
     },
 }

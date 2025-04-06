@@ -123,7 +123,7 @@ class TendersFavorites(models.Model):
                 if not tenders_ids:
                     phrases_ids = self.env['tenders.mail.phrases.message'].search([])
                     phrase = phrases_ids[0]._get_random_phrases() if phrases_ids else ""
-                    values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "noreply@company.com",email_to=record.email) 
+                    values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "alertas@e-vali.com",email_to=record.email) 
                     mail = self.env['mail.mail'].sudo().create(values_mail)   
                     mail.send()
                     return
@@ -131,7 +131,7 @@ class TendersFavorites(models.Model):
                 # values_mail = self.generate_mail_template(tenders=tenders_ids,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
                 base_url = self.obtener_url_base()
                 url =  base_url + f'/favoritos/{record.id}' if base_url else ""
-                values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "noreply@company.com",email_to=record.email)
+                values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "alertas@e-vali.com",email_to=record.email)
                 mail = self.env['mail.mail'].sudo().create(values_mail)
                 mail.send()
     def obtener_url_base(self):
