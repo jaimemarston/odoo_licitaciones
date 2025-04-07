@@ -26,11 +26,35 @@
                         <!-- <field name="emails_ids" widget="many2many_tags" required="1"/> -->
                         <field name="user_id" />
                         <field name="email" />
+
                     </group>
 
                     <notebook>
                         <page name="tenders" string="Licitaciones">
-                            <field name="tenders_ids" />
+                            <field name="tenders_ids"  mode="list,form">                     
+                                <list delete="false">
+                                    <field name="id_licitacion" string="Licitacion"/>
+                                    <field name="fecha_publicacion" string="Fecha de Publicacion"/>
+                                    <field name="titulo" string="Título de Licitación"/>
+                                    <field name="objeto_contratacion" string="objeto de contratacion"/>
+                                    <field name="monto_total" string="monto total"/>
+                                    <field name="is_featured" widget="boolean_toggle" string="Destacado"/>
+                                    
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Destacados">
+                            <field name="featured_tenders_ids" mode="list,form" readonly="1">
+                                <list>
+                                    <field name="id_licitacion" string="Licitacion"/>
+                                    <field name="fecha_publicacion" string="Fecha de Publicacion"/>
+                                    <field name="titulo" string="Título de Licitación"/>
+                                    <field name="objeto_contratacion" string="objeto de contratacion"/>
+                                    <field name="monto_total" string="monto total"/>
+                                    <field name="is_featured" widget="boolean_toggle" string="Destacado" readonly="1"/>
+                                </list>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
@@ -43,7 +67,7 @@
         <field name="model">licitaciones.favorites</field>
         <field name="arch" type="xml">
             <list>
-                <field name="claves"/>
+                <field name="words_ids" string="Claves" widget="many2many_tags"/>
                 <field name="restricciones"/>
                 <field name="montoinicial"/>
                 <field name="montotope"/>

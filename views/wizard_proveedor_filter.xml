@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <form string="Filtrar Proveedores">
                     <group>
-                        <field name="name" string="Nombre del Proveedor"/>
-                        <field name="ruc" string="RUC del Proveedor"/>
+                        <field name="name" string="Nombre"/>
+                        <field name="ruc" string="RUC"/>
                     </group>
                     <footer>
                         <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>

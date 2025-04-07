@@ -21,12 +21,23 @@ class TendersFavorites(models.Model):
     correo = fields.Char(string="Correos Electrónicos", help="Ingrese múltiples correos separados por comas.")
 
     emails_ids = fields.Many2many('licitaciones.emails.favorites', string='Emails')
-    tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders')
+    #tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders',readonly=True)
     words_ids = fields.Many2many('tender.word.favorites', string='words')
     date_start = fields.Datetime('date start')
     date_end = fields.Datetime('date end')
     user_id = fields.Many2one('res.users', string='user', default=lambda self: self.env.uid)
     email = fields.Char('email', related='user_id.email')
+    is_featured = fields.Boolean(string="Destacado", default=False)  # Campo nuevo
+    # Relación con licitaciones
+    tenders_ids = fields.One2many('licitaciones.licitacion', 'favorites_id', string="Licitaciones")
+    
+    # Relación directa para los destacados con dominio
+    featured_tenders_ids = fields.One2many(
+        'licitaciones.licitacion', 'favorites_id', 
+        string="Destacados", 
+        domain=[('is_featured', '=', True)]
+    )
+
 
     def send_massive_mails_favorites(self):
         favorites = self.search([('claves', '!=', False), ('emails_ids', '!=', False)])
@@ -133,7 +144,15 @@ class TendersFavorites(models.Model):
                 url =  base_url + f'/favoritos/{record.id}' if base_url else ""
                 values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "alertas@e-vali.com",email_to=record.email)
                 mail = self.env['mail.mail'].sudo().create(values_mail)
-                mail.send()
+                #mail.send()
+
+                try:
+                    mail.send()
+                    logging.info(f"Correo enviado a {record.email}")
+                except Exception as e:
+                    logging.error(f"Error al enviar el correo: {e}")
+
+
     def obtener_url_base(self):
         website = self.env['website'].get_current_website()
         if website:

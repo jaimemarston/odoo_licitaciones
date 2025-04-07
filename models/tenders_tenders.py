@@ -38,6 +38,10 @@ class TendersLicitacion(models.Model):
     # buyers_ids = fields.One2many('licitaciones.buyer.pivot', 'tender_id', string='Buyers')
     buyer_id = fields.Many2one('licitaciones.buyer', string='buyer')
     bidder_winner = fields.Many2one('licitaciones.postores', string="Ganador")
+    is_featured = fields.Boolean(string="Destacado", default=False)
+    favorites_id = fields.Many2one('licitaciones.favorites', string="Favoritos")
+
+
     
     estado_item = fields.Selection([
         ('activo', 'Activo'),

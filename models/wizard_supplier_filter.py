@@ -4,8 +4,8 @@ class SupplierFilterWizard(models.TransientModel):
     _name = 'licitaciones.supplier.filter.wizard'
     _description = 'Filtro de Proveedores'
 
-    name = fields.Char(string="Nombre del Proveedor")
-    ruc = fields.Char(string="RUC del Proveedor")
+    name = fields.Char(string="Nombre")
+    ruc = fields.Char(string="RUC")
 
     def aplicar_filtro(self):
         domain = []

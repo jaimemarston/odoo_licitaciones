@@ -6,7 +6,7 @@
             <field name="name">wizard.buyer.filter.form</field>
             <field name="model">licitaciones.buyer.filter.wizard</field>
             <field name="arch" type="xml">
-                <form string="Filtrar Compradores">
+                <form string="Filtrar Contratantes">
                     <group>
                         <field name="name"/>
                     </group>
@@ -20,15 +20,15 @@
 
         <!-- Acción del wizard -->
         <record id="action_wizard_buyer_filter" model="ir.actions.act_window">
-            <field name="name">Filtrar Compradores</field>
+            <field name="name">Filtrar Contratantes</field>
             <field name="res_model">licitaciones.buyer.filter.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
 
-        <!-- Acción automática al abrir la vista de compradores -->
+        <!-- Acción automática al abrir la vista de Contratantes -->
         <record id="action_open_filter_wizard_auto_buyer" model="ir.actions.server">
-            <field name="name">Abrir Filtro de Compradores</field>
+            <field name="name">Abrir Filtro de Contratantes</field>
             <field name="model_id" ref="model_licitaciones_buyer"/>
             <field name="binding_model_id" ref="model_licitaciones_buyer"/>
             <field name="state">code</field>
@@ -38,7 +38,7 @@
                     'res_model': 'licitaciones.buyer.filter.wizard',
                     'view_mode': 'form',
                     'target': 'new',
-                    'name': '🎯 Filtrar Compradores',
+                    'name': '🎯 Filtrar Contratantes',
                 }
             </field>
         </record>

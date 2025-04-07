@@ -2,7 +2,7 @@ from odoo import models, fields
 
 class BuyerFilterWizard(models.TransientModel):
     _name = 'licitaciones.buyer.filter.wizard'
-    _description = 'Filtro de Compradores'
+    _description = 'Filtro de Contratantes'
 
     name = fields.Char(string="Nombre de Empresa")
 
@@ -13,7 +13,7 @@ class BuyerFilterWizard(models.TransientModel):
 
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Compradores Filtrados',
+            'name': 'Contratantes Filtrados',
             'res_model': 'licitaciones.buyer',
             'view_mode': 'list,form',
             'domain': domain,
@@ -24,8 +24,8 @@ class BuyerFilterWizard(models.TransientModel):
         """Redirecciona a la vista de licitaciones al cancelar el wizard"""
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Licitaciones',
-            'res_model': 'licitaciones.licitacion',
+            'name': 'Contratantes',
+            'res_model': 'licitaciones.buyer',
             'view_mode': 'list,form',
             'target': 'main',  # Cambiado a 'main' para evitar acumulación de pestañas
         }
