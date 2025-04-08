@@ -48,13 +48,14 @@ class TendersProveedor(models.Model):
         bidder = self.env['licitaciones.postores'].search([('supplier_id', '=', supplier_id.id)])
         domain = [('postores_ids', 'in', bidder.ids)]
         competence = self.env['licitaciones.licitacion'].search(domain).mapped('postores_ids')
+        suplier_ids = self.env['licitaciones.postores'].search([('id', 'in', competence.ids)]).mapped('supplier_id')
         return {
             'name': 'Registros Filtrados',
             'type': 'ir.actions.act_window',
             'res_model': 'licitaciones.proveedor',
             'view_id': self.env.ref('tenders.view_proveedor_tree').id,
             'view_mode': 'list',
-            'domain': [('id', 'in', competence.ids)],
+            'domain': [('id', 'in', suplier_ids.ids)],
         }
 
     @api.depends('bidders_ids', 'title_filter', 'date_filter', 'end_date_filter')

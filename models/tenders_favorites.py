@@ -189,7 +189,7 @@ class TendersFavorites(models.Model):
                 </head>
                 <body>
                 <div class="email-container">
-                    <div style="margin: 0px; padding: 0px; background-color: #de99cc; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                    <div style="margin: 0px; padding: 0px; background-color: #24a2ee; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
                         <h2 style="margin: 0px; padding: 0px; font-size: 16px; text-align: center; color: #ffffff;">
                             Licitaciones de tus favoritos
                         </h2>
@@ -272,7 +272,7 @@ class TendersFavorites(models.Model):
                 </head>
                 <body>
                 <div class="email-container container">
-                    <div style="margin: 0px; padding: 0px; background-color: #14212e; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                    <div style="margin: 0px; padding: 0px; background-color: #24a2ee; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
                         <h2 style="margin: 0px; padding: 0px; font-size: 16px; text-align: center; color: #ffffff;">
                             Licitaciones de tus favoritos
                         </h2>
@@ -299,9 +299,13 @@ class TendersFavorites(models.Model):
                                         <tbody>
                                             {''.join(f'''
                                                 <tr>
-                                                    <td style="padding: 10px; text-align: center;">{tender.objeto_contratacion}</td>
+                                                    <td style="padding: 10px; text-align: center;"><span style="background-color: #f2f2f2;">{tender.objeto_contratacion}</span>
+                                                            {''.join(f'''
+                                                                <div style="padding: 10px; text-align: center;">Titulo: {crono.title} - Fecha inicio: {crono.fecha_inicio} - Fecha fin: {crono.fecha_fin}</div>
+                                                            ''' for crono in tender.cronograma_ids)}
+                                                    </td>
                                                 </tr>
-                                            ''' for tender in self.tenders_ids)}
+                                            ''' for tender in self.featured_tenders_ids)}
                                         </tbody>
                                     </table>
                                 </div>
@@ -358,7 +362,7 @@ class TendersFavorites(models.Model):
                 </head>
                 <body>
                 <div class="email-container">
-                    <div style="margin: 0px; padding: 0px; background-color: #de99cc; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
+                    <div style="margin: 0px; padding: 0px; background-color: #24a2ee; color: #fff; padding: 8px; border-top-left-radius: 3px; border-top-right-radius: 3px;">
                         <h2 style="margin: 0px; padding: 0px; font-size: 16px; text-align: center; color: #ffffff;">
                             Licitaciones de tus favoritos
                         </h2>

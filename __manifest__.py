@@ -20,6 +20,7 @@
         'views/wizard_buyer_filter.xml',
         'views/wizard_proveedor_filter.xml',
         'views/tenders_competence_views.xml',
+        'views/tenders_mail_phrases_message_views.xml',
         'views/menus.xml',
         'wizard/supplier_users_views.xml',
         'data/ir_cron_data.xml',

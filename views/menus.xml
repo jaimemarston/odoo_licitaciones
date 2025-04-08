@@ -19,6 +19,7 @@
     <!-- Menú del Tablero -->
     <menuitem id="menu_tenders_contact_us" name="Contactanos" parent="mail.menu_root_discuss" sequence="5" action="tenders.action_tenders_contact_us"/>
     <menuitem id="menu_tenders_competence" name="Competidores" parent="menu_licitaciones_root" sequence="60" action="tenders.action_filtered_competence_server"/>
+    <menuitem id="tenders_phrases_favorites_menu" name="Fraces de favoritos" action="tenders.tenders_mail_phrases_message_action" groups="base.group_system" parent="menu_licitaciones_root" sequence="60"/>
     
     <!-- <menuitem id="menu_licitaciones" name="Base de Informacion" parent="menu_licitaciones_root" action="action_licitacion" sequence="65"/> -->
 
