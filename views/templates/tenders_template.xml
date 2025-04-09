@@ -11,7 +11,7 @@
                     <div class="panel panel-primary filterable">
                         <div id="wrap" class="table-responsive">
                             <table class="table table-sm table-hover table-striped">
-                                <thead class="table-dark">
+                                <thead style="background-color: #24a2ee;">
                                     <tr >
                                         <th class="text-nowrap"><span >Titulo</span></th>
                                         <th class="text-nowrap"><span >Fecha publicacion</span></th>
@@ -29,7 +29,7 @@
                                             <td><span> <t t-esc="tender.objeto_contratacion"/></span></td>
                                             <td><span> <t t-esc="tender.monto_total"/></span></td>
                                             <td><span> <t t-esc="tender.buyer_id.name"/></span></td>
-                                            <td class="text-nowrap"><a class="btn btn-primary btn-md" t-att-href="'/tenders/' + str(tender.id)">Ver mas</a></td>
+                                            <td class="text-nowrap"><a class="btn btn-md" style="background-color: #24a2ee;" t-att-href="'/tenders/' + str(tender.id)">Ver mas</a></td>
                                         </tr>
                                     </t>
                                 </tbody>

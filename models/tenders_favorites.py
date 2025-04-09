@@ -23,8 +23,8 @@ class TendersFavorites(models.Model):
     emails_ids = fields.Many2many('licitaciones.emails.favorites', string='Emails')
     #tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders',readonly=True)
     words_ids = fields.Many2many('tender.word.favorites', string='words')
-    date_start = fields.Datetime('date start')
-    date_end = fields.Datetime('date end')
+    date_start = fields.Date('date start')
+    date_end = fields.Date('date end')
     user_id = fields.Many2one('res.users', string='user', default=lambda self: self.env.uid)
     email = fields.Char('email', related='user_id.email')
     is_featured = fields.Boolean(string="Destacado", default=False)  # Campo nuevo
@@ -389,3 +389,9 @@ class TendersFavorites(models.Model):
             'email_from': email_from,
         }
         return mail_values
+    
+    @api.model
+    def create(self, vals):
+        record = super().create(vals)
+        record.action_send_email()
+        return record
