@@ -16,7 +16,7 @@
             </field>
         </record>
         <record id="tenders_mail_phrases_message_action" model="ir.actions.act_window">
-            <field name="name">Fraces de favoritos</field>
+            <field name="name">Frases para Mail</field>
             <field name="res_model">tenders.mail.phrases.message</field>
             <field name="view_mode">list,form</field>
         </record>
