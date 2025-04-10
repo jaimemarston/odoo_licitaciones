@@ -53,7 +53,7 @@ class TendersFavorites(models.Model):
             domain = self.get_domain_tenders()
             if not domain:
                 raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
-                
+            domain.append(('estado_item', '=', 'activo'))
             tenders_ids = self.env['licitaciones.licitacion'].search(domain)
             if not tenders_ids:
                 self.tenders_ids = [(6, 0, [])]
@@ -123,34 +123,35 @@ class TendersFavorites(models.Model):
         for record in self:
             if not record.email:
                 raise ValidationError(_("Debe agregar correos electronicos para enviar las licitaciones"))
+            record.send_mail_favorite()
             
-            domain = record.get_domain_tenders()
-            if not domain:
-                raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
-            
-            tenders_ids = self.env['licitaciones.licitacion'].search(domain)
-            # for favorite in record.emails_ids:
-            if record.email:
-                if not tenders_ids:
-                    phrases_ids = self.env['tenders.mail.phrases.message'].search([])
-                    phrase = phrases_ids[0]._get_random_phrases() if phrases_ids else ""
-                    values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "alertas@e-vali.com",email_to=record.email) 
-                    mail = self.env['mail.mail'].sudo().create(values_mail)   
-                    mail.send()
-                    return
+            # domain = record.get_domain_tenders()
+            # if not domain:
+                # raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
+    def send_mail_favorite(self, tenders_ids=None):
+        tenders_ids = self.featured_tenders_ids if not tenders_ids else tenders_ids #self.env['licitaciones.licitacion'].search(domain)
+        # for favorite in record.emails_ids:
+        if self.email:
+            if not tenders_ids:
+                phrases_ids = self.env['tenders.mail.phrases.message'].search([])
+                phrase = phrases_ids[0]._get_random_phrases() if phrases_ids else ""
+                values_mail = self.generate_for_website_mail_danger_template(message=phrase,email_from=self.env.company.email or "alertas@e-vali.com",email_to=self.email) 
+                mail = self.env['mail.mail'].sudo().create(values_mail)   
+                mail.send()
+                return
 
-                # values_mail = self.generate_mail_template(tenders=tenders_ids,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
-                base_url = self.obtener_url_base()
-                url =  base_url + f'/favoritos/{record.id}' if base_url else ""
-                values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "alertas@e-vali.com",email_to=record.email)
-                mail = self.env['mail.mail'].sudo().create(values_mail)
-                #mail.send()
+            # values_mail = self.generate_mail_template(tenders=tenders_ids,email_from=self.env.company.email or "noreply@company.com",email_to=favorite.email)
+            base_url = self.obtener_url_base()
+            url =  base_url + f'/favoritos/{self.id}' if base_url else ""
+            values_mail = self.generate_for_website_mail_template(url=url,email_from=self.env.company.email or "alertas@e-vali.com",email_to=self.email, tenders=tenders_ids)
+            mail = self.env['mail.mail'].sudo().create(values_mail)
+            #mail.send()
 
-                try:
-                    mail.send()
-                    logging.info(f"Correo enviado a {record.email}")
-                except Exception as e:
-                    logging.error(f"Error al enviar el correo: {e}")
+            try:
+                mail.send()
+                logging.info(f"Correo enviado a {self.email}")
+            except Exception as e:
+                logging.error(f"Error al enviar el correo: {e}")
 
 
     def obtener_url_base(self):
@@ -244,7 +245,7 @@ class TendersFavorites(models.Model):
         }
         return mail_values
     
-    def generate_for_website_mail_template(self, url, email_from, email_to):
+    def generate_for_website_mail_template(self, url, email_from, email_to, tenders):
         user_lang = self.env.lang or 'en_US'
         mail_values = {
             'subject': self.with_context(lang=user_lang).env._('Tus licitaciones'),
@@ -299,13 +300,13 @@ class TendersFavorites(models.Model):
                                         <tbody>
                                             {''.join(f'''
                                                 <tr>
-                                                    <td style="padding: 10px; text-align: center;"><span style="background-color: #f2f2f2;">{tender.objeto_contratacion}</span>
+                                                    <td style="padding: 10px;"><span style="background-color: #f2f2f2; text-align: center;">{tender.objeto_contratacion}</span>
                                                             {''.join(f'''
-                                                                <div style="padding: 10px; text-align: center;">Titulo: {crono.title} - Fecha inicio: {crono.fecha_inicio} - Fecha fin: {crono.fecha_fin}</div>
+                                                                <div style="padding: 10px; text-align: left;"> * Titulo: {crono.title} - Fecha inicio: {crono.fecha_inicio} - Fecha fin: {crono.fecha_fin}</div>
                                                             ''' for crono in tender.cronograma_ids)}
                                                     </td>
                                                 </tr>
-                                            ''' for tender in self.featured_tenders_ids)}
+                                            ''' for tender in tenders)}
                                         </tbody>
                                     </table>
                                 </div>

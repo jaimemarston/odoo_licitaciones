@@ -24,7 +24,7 @@
                         <!-- <field name="tiposervicio_ids" widget="many2many_tags"/> -->
                         <!-- <field name="correo"/> -->
                         <!-- <field name="emails_ids" widget="many2many_tags" required="1"/> -->
-                        <field name="user_id" />
+                        <field name="user_id" readonly="1"/>
                         <field name="email" />
 
                     </group>

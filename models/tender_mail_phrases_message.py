@@ -5,7 +5,7 @@ import random
 
 class TendersMailPhrasesMessage(models.Model):
     _name = 'tenders.mail.phrases.message'
-    _description = 'fraces para favoritos fallidos'
+    _description = 'frases para mail'
 
     name = fields.Char('name')
     type = fields.Selection([
