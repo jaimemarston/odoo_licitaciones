@@ -40,10 +40,12 @@ class TendersFavorites(models.Model):
 
 
     def send_massive_mails_favorites(self):
-        favorites = self.search([('claves', '!=', False), ('emails_ids', '!=', False)])
+        favorites = self.search([('words_ids', '!=', False), ('email', '!=', False), ('tenders_ids', '!=', False)])
         if favorites:
             for favorite in favorites:
-                favorite.action_send_email()
+                today = fields.Date.today()
+                tenders_ids = favorite.tenders_ids.filtered(lambda tender: tender.write_date and tender.write_date.date() >= today)
+                favorite.send_mail_favorite(tenders_ids=tenders_ids)
 
     @api.onchange('words_ids', 'montoinicial', 'montotope', 'date_start', 'date_end')
     def _onchange_words_ids(self):

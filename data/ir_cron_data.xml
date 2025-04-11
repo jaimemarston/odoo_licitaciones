@@ -4,11 +4,12 @@
     <data>
     
         <record id="ir_cron_massive_send_mails_favorites" model="ir.cron">
-            <field name="name">Mssive send mails to favorites</field>
+            <field name="name">Massive send mails to favorites</field>
             <field name="model_id" ref="model_licitaciones_favorites"/>
             <field name="code">model.send_massive_mails_favorites()</field>
             <field name="interval_type">days</field>
             <field name="interval_number">1</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=7, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
             <field name="state">code</field>
             <field name="active" eval="True"/>
         </record>
