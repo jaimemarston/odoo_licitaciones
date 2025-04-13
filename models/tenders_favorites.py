@@ -44,13 +44,11 @@ class TendersFavorites(models.Model):
         if favorites:
             for favorite in favorites:
                 today = fields.Date.today()
-                tenders_ids = favorite.tenders_ids.filtered(lambda tender: tender.write_date and tender.write_date.date() >= today)
+                tenders_ids = favorite.tenders_ids.filtered(lambda tender: tender.write_date and tender.write_date.date() >= today and tender.estado_item == 'activo')
                 favorite.send_mail_favorite(tenders_ids=tenders_ids)
 
     @api.onchange('words_ids', 'montoinicial', 'montotope', 'date_start', 'date_end')
     def _onchange_words_ids(self):
-        logging.info('\n' * 2)
-        logging.info('in ochange')
         if self.words_ids or self.montoinicial or self.montotope:
             domain = self.get_domain_tenders()
             if not domain:
@@ -393,8 +391,13 @@ class TendersFavorites(models.Model):
         }
         return mail_values
     
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
-        record.action_send_email()
-        return record
+    # @api.model
+    # def create(self, vals):
+    #     record = super().create(vals)
+    #     record.action_send_email()
+    #     return record
+
+    def refres_favorites(self):
+        favorites = self.search([])
+        for favorite in favorites:
+            favorite._onchange_words_ids()

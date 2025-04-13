@@ -13,6 +13,17 @@
             <field name="state">code</field>
             <field name="active" eval="True"/>
         </record>
+
+        <record id="ir_cron_massive_refresh_favorites" model="ir.cron">
+            <field name="name">Actualización de Favoritos</field>
+            <field name="model_id" ref="model_licitaciones_favorites"/>
+            <field name="code">model.refres_favorites()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="nextcall" eval="(DateTime.now().replace(hour=6, minute=0) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="state">code</field>
+            <field name="active" eval="True"/>
+        </record>
     
     </data>
     
