@@ -49,14 +49,19 @@ class TendersFavorites(models.Model):
 
     @api.onchange('words_ids', 'montoinicial', 'montotope', 'date_start', 'date_end')
     def _onchange_words_ids(self):
+        logging.info('\n' * 2)
+        logging.info('in ochange')
         if self.words_ids or self.montoinicial or self.montotope:
             domain = self.get_domain_tenders()
             if not domain:
                 raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
-            domain.append(('estado_item', '=', 'activo'))
+            domain.append(('estado_item', '=', 'active'))
             tenders_ids = self.env['licitaciones.licitacion'].search(domain)
+            logging.info(f"Dominio aplicado: {domain}")
+            logging.info(f"IDs encontrados: {tenders_ids.ids}")
             if not tenders_ids:
                 self.tenders_ids = [(6, 0, [])]
+                raise ValidationError(f"No se encontraron licitaciones que coincidan con los criterios seleccionados.")
                 return
             self.tenders_ids = [(6, 0, tenders_ids.ids)]
 
@@ -96,27 +101,40 @@ class TendersFavorites(models.Model):
     #             domain.append(('monto_total','>=' if field == self.montoinicial else '<=', field))
     #         logging.info(type(field))
     #     return domain
-    
+        
     def get_domain_tenders(self):
         logging.info('\n' * 3 + 'en domain')
         domain = []
+
+        # Palabras clave
         if self.words_ids:
             keys = self.words_ids.mapped('name')
-            domain.extend([('objeto_contratacion', 'ilike', f"%{key}%") for key in keys])
-            if len(keys) > 1:
-                domain = ['|'] * (len(keys) - 1) + domain
+            word_domain = [('objeto_contratacion', 'ilike', key) for key in keys]
+            if len(word_domain) > 1:
+                # Agrupa con OR
+                or_domain = word_domain[0]
+                for cond in word_domain[1:]:
+                    or_domain = ['|', or_domain, cond]
+                domain.append(or_domain)
+            else:
+                domain.extend(word_domain)
+
+        # Monto inicial
         if self.montoinicial:
             domain.append(('monto_total', '>=', self.montoinicial))
+
+        # Monto tope
         if self.montotope:
-            logging.info(self.montotope)
             domain.append(('monto_total', '<=', self.montotope))
-        
+
+        # Fechas
         if self.date_start:
             domain.append(('fecha_publicacion', '>=', self.date_start))
 
         if self.date_end:
             domain.append(('fecha_publicacion', '<=', self.date_end))
-        logging.info(f"Domain construido: {domain}")
+
+        logging.info(f"✅ Dominio final construido: {domain}")
         return domain
 
     def action_send_email(self):

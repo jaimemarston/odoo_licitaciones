@@ -6,21 +6,22 @@
     </record>
     <menuitem id="menu_licitaciones_root" name="Licitaciones" sequence="10" web_icon="tenders,static/description/icon.png"/>
 
-    <menuitem id="menu_licitaciones_dashboard" name="Dashboard" parent="menu_licitaciones_root" action="board.open_board_my_dash_action" sequence="20"/>
 
-    <menuitem id="menu_filtrar_licitaciones_auto" name="Licitaciones"  parent="menu_licitaciones_root"   action="action_open_filter_wizard_auto"  sequence="25"/>
+    <!-- Menú para Favoritos -->
+    <menuitem id="menu_licitaciones_favorites" name="Favoritos" parent="menu_licitaciones_root"  action="action_favorites" sequence="20"/>
 
-
+    <!-- Menú Principal-->
+    <menuitem id="menu_filtrar_licitaciones_auto" name="Licitaciones"  parent="menu_licitaciones_root"   action="action_open_filter_wizard_auto"  sequence="25"/>   
     <menuitem id="menu_contratantes" name="Contratantes" parent="menu_licitaciones_root" action="action_open_filter_wizard_auto_buyer" sequence="30"/>
     <!-- Menú para Proveedores -->
     <menuitem id="menu_proveedores" name="Postores" parent="menu_licitaciones_root" action="action_open_filter_wizard_auto_supplier" sequence="40"/>
-    <!-- Menú para Favoritos -->
-    <menuitem id="menu_licitaciones_favorites" name="Favoritos" parent="menu_licitaciones_root"  action="action_favorites" sequence="50"/>
+
     <!-- Menú del Tablero -->
     <menuitem id="menu_tenders_contact_us" name="Contactanos" parent="mail.menu_root_discuss" sequence="5" action="tenders.action_tenders_contact_us"/>
     <menuitem id="menu_tenders_competence" name="Competidores" parent="menu_licitaciones_root" sequence="60" action="tenders.action_filtered_competence_server"/>
-    <menuitem id="tenders_phrases_favorites_menu" name="Frases para mail" action="tenders.tenders_mail_phrases_message_action" groups="base.group_system" parent="menu_licitaciones_root" sequence="60"/>
-    
+    <menuitem id="tenders_phrases_favorites_menu" name="Frases para mail" action="tenders.tenders_mail_phrases_message_action" groups="base.group_system" parent="menu_licitaciones_root" sequence="65"/>
+    <menuitem id="menu_licitaciones_dashboard" name="Dashboard" parent="menu_licitaciones_root" action="board.open_board_my_dash_action" sequence="70"/>
+
     <!-- <menuitem id="menu_licitaciones" name="Base de Informacion" parent="menu_licitaciones_root" action="action_licitacion" sequence="65"/> -->
 
     <record id="mail.menu_root_discuss" model="ir.ui.menu">
