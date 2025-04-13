@@ -1,6 +1,8 @@
 from odoo import models, fields, api,_
 from odoo.exceptions import ValidationError
 import re
+from odoo.osv.expression import OR, AND
+
 
 import logging
 class TendersFavorites(models.Model):
@@ -103,36 +105,30 @@ class TendersFavorites(models.Model):
     #     return domain
         
     def get_domain_tenders(self):
-        logging.info('\n' * 3 + 'en domain')
-        domain = []
+        logging.info('\n' * 3 + '💡 Ejecutando get_domain_tenders')
 
-        # Palabras clave
+        word_conditions = []
+        extra_conditions = []
+        domain = []
         if self.words_ids:
             keys = self.words_ids.mapped('name')
-            word_domain = [('objeto_contratacion', 'ilike', key) for key in keys]
-            if len(word_domain) > 1:
-                # Agrupa con OR
-                or_domain = word_domain[0]
-                for cond in word_domain[1:]:
-                    or_domain = ['|', or_domain, cond]
-                domain.append(or_domain)
-            else:
-                domain.extend(word_domain)
-
-        # Monto inicial
+            domain.extend([('objeto_contratacion', 'ilike', f"%{key}%") for key in keys])
+            if len(keys) > 1:
+                domain = ['|'] * (len(keys) - 1) + domain
         if self.montoinicial:
             domain.append(('monto_total', '>=', self.montoinicial))
-
-        # Monto tope
         if self.montotope:
+            logging.info(self.montotope)
             domain.append(('monto_total', '<=', self.montotope))
 
-        # Fechas
         if self.date_start:
             domain.append(('fecha_publicacion', '>=', self.date_start))
 
         if self.date_end:
             domain.append(('fecha_publicacion', '<=', self.date_end))
+        logging.info(f"Domain construido: {domain}")
+        return domain
+
 
         logging.info(f"✅ Dominio final construido: {domain}")
         return domain

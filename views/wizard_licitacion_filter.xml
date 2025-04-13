@@ -14,6 +14,7 @@
                     <field name="filtro_monto"/>
                     <field name="fecha_inicio"/>
                     <field name="fecha_fin"/>
+                     <field name="categoria_adquisicion"/>
                 </group>
                 <footer>
                     <button string="Aplicar Filtro" type="object" name="aplicar_filtro" class="btn-primary"/>

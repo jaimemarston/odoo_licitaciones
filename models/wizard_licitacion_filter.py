@@ -14,7 +14,13 @@ class LicitacionFilterWizard(models.TransientModel):
     monto_minimo = fields.Float(string="Monto Mínimo")
     
     
-    
+    # Nuevo campo de selección
+    categoria_adquisicion = fields.Selection([
+        ('bienes', 'Bienes'),
+        ('obras', 'Obras'),
+        ('servicios', 'Servicios')
+    ], string="Categoría de Adquisición")
+
     filtro_monto = fields.Selection([
         ('mayor_8uit', 'Monto Mayor a 8 UIT'),
         ('menor_8uit', 'Monto Menor o Igual a 8 UIT')
@@ -45,6 +51,8 @@ class LicitacionFilterWizard(models.TransientModel):
             domain.append(('item_ids.descripcion', 'ilike', self.items))
         if self.filtro_monto == 'mayor_8uit':
             domain.append(('monto_total', '>', 8 * uit))
+        if self.categoria_adquisicion:
+            domain.append(('categoria_adquisicion', '=', self.categoria_adquisicion))
         elif self.filtro_monto == 'menor_8uit':
             domain.append(('monto_total', '<=', 8 * uit))
         

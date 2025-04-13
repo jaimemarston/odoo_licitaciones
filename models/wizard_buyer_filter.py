@@ -6,6 +6,10 @@ class BuyerFilterWizard(models.TransientModel):
 
     name = fields.Char(string="Nombre de Empresa")
 
+    
+
+
+
     def aplicar_filtro(self):
         domain = []
         if self.name:
