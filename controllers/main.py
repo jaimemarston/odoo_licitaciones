@@ -14,7 +14,10 @@ class TendersController(http.Controller):
         tenders = request.env['licitaciones.favorites'].sudo().browse(favorite_id)
         values = {}
         if tenders and tenders.featured_tenders_ids:
-            values['tenders'] = tenders.featured_tenders_ids
+            # tenders_ids = request.env['licitaciones.licitacion'].search([('id', 'in', tenders.featured_tenders_ids.mapped('tender_id').ids)])
+            values['tenders'] = tenders.featured_tenders_ids.mapped('tender_id')
+        if not values and tenders.tenders_ids:
+            values['tenders'] = tenders.tenders_ids
         return request.render("tenders.tenders_tenders_template_views", values)
     
     @http.route('/tenders/<int:tender_id>',type='http', auth='public', website=True)

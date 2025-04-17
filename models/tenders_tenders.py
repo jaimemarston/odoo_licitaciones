@@ -74,3 +74,13 @@ class TendersLicitacion(models.Model):
             if record.item_ids:
                 total = len(record.item_ids)
                 record.total_items = total
+    
+    def action_add_featured_tender(self):
+        if self.env.context.get("favorite_id"):
+            favorite = self.env['licitaciones.favorites'].search([('id', '=', self.env.context.get("favorite_id"))], limit=1)
+            self.env['featured.tenders'].create({
+                'user_id': self.env.user.id,
+                'tender_id': self.id,
+                'favorite_id': favorite.id
+            })
+            favorite.split_tenders_favorites()

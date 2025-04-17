@@ -26,6 +26,8 @@
                         <!-- <field name="emails_ids" widget="many2many_tags" required="1"/> -->
                         <field name="user_id" readonly="1"/>
                         <field name="email" />
+                        <button string="Filtrar" name="action_filter_tenders_favorites" type="object" class="oe_highlight"/>
+                        <button string="Limpiar" name="action_clear_tenders_favorites" type="object" class="oe_highlight"/>
 
                     </group>
 
@@ -38,8 +40,7 @@
                                     <field name="titulo" string="Título de Licitación"/>
                                     <field name="objeto_contratacion" string="objeto de contratacion"/>
                                     <field name="monto_total" string="monto total"/>
-                                    <field name="is_featured" widget="boolean_toggle" string="Destacado"/>
-                                    
+                                    <button name="action_add_featured_tender" type="object" string="Añadir" context="{'favorite_id': parent.id}"/>
                                 </list>
                             </field>
                         </page>
@@ -52,7 +53,7 @@
                                     <field name="titulo" string="Título de Licitación"/>
                                     <field name="objeto_contratacion" string="objeto de contratacion"/>
                                     <field name="monto_total" string="monto total"/>
-                                    <field name="is_featured" widget="boolean_toggle" string="Destacado" readonly="1"/>
+                                    <button name="action_remove_featured_tender" type="object" string="Eliminar"/>
                                 </list>
                             </field>
                         </page>

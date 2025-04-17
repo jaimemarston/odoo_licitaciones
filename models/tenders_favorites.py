@@ -2,7 +2,7 @@ from odoo import models, fields, api,_
 from odoo.exceptions import ValidationError
 import re
 from odoo.osv.expression import OR, AND
-
+from datetime import date
 
 import logging
 class TendersFavorites(models.Model):
@@ -23,23 +23,48 @@ class TendersFavorites(models.Model):
     correo = fields.Char(string="Correos Electrónicos", help="Ingrese múltiples correos separados por comas.")
 
     emails_ids = fields.Many2many('licitaciones.emails.favorites', string='Emails')
-    #tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders',readonly=True)
+    tenders_ids = fields.Many2many('licitaciones.licitacion', string='tenders',readonly=True)
     words_ids = fields.Many2many('tender.word.favorites', string='words')
-    date_start = fields.Date('date start')
+    date_start = fields.Date('date start', default=lambda self: date.today().replace(year=date.today().year - 1))
     date_end = fields.Date('date end')
     user_id = fields.Many2one('res.users', string='user', default=lambda self: self.env.uid)
     email = fields.Char('email', related='user_id.email')
     is_featured = fields.Boolean(string="Destacado", default=False)  # Campo nuevo
     # Relación con licitaciones
-    tenders_ids = fields.One2many('licitaciones.licitacion', 'favorites_id', string="Licitaciones")
+    # tenders_ids = fields.One2many('licitaciones.licitacion', 'favorites_id', string="Licitaciones", on_delete="set null")
     
     # Relación directa para los destacados con dominio
     featured_tenders_ids = fields.One2many(
-        'licitaciones.licitacion', 'favorites_id', 
-        string="Destacados", 
-        domain=[('is_featured', '=', True)]
+        'featured.tenders', 'favorite_id', 
+        string="Destacados",
     )
+    def action_filter_tenders_favorites(self):
+        allow_fields = [self.words_ids, self.montoinicial, self.montotope, self.date_start, self.date_end, self.tiposervicio_ids]
+        if not any(allow_fields):
+            raise  ValidationError(_("Debe rellenar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope, Fecha de inicio, Fecha final"))
+        domain = self.get_domain_tenders()
+        # domain.append(('estado_item', '=', 'active'))
+        tenders_ids = self.env['licitaciones.licitacion'].search(domain)
+        if not tenders_ids:
+            self.tenders_ids = [(6, 0, [])]
+            return
+        self.tenders_ids = [(6,0, tenders_ids.ids)]
+        self.split_tenders_favorites()
+        return
+    
+    def action_clear_tenders_favorites(self):
+        self.tenders_ids = [(6, 0, [])]
+        return
 
+    def split_tenders_favorites(self):
+        for record in self:
+            if not record.featured_tenders_ids or not record.tenders_ids:
+                return
+            featured = record.featured_tenders_ids.mapped('tender_id')
+            tenders_remove = record.tenders_ids.filtered(lambda rec: rec in featured)
+            if not tenders_remove:
+                return
+            record.write({'tenders_ids': [(3, rec.id) for rec in tenders_remove]})
 
     def send_massive_mails_favorites(self):
         favorites = self.search([('words_ids', '!=', False), ('email', '!=', False), ('tenders_ids', '!=', False)])
@@ -49,23 +74,23 @@ class TendersFavorites(models.Model):
                 tenders_ids = favorite.tenders_ids.filtered(lambda tender: tender.write_date and tender.write_date.date() >= today and tender.estado_item == 'activo')
                 favorite.send_mail_favorite(tenders_ids=tenders_ids)
 
-    @api.onchange('words_ids', 'montoinicial', 'montotope', 'date_start', 'date_end')
-    def _onchange_words_ids(self):
-        logging.info('\n' * 2)
-        logging.info('in ochange')
-        if self.words_ids or self.montoinicial or self.montotope:
-            domain = self.get_domain_tenders()
-            if not domain:
-                raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
-            domain.append(('estado_item', '=', 'active'))
-            tenders_ids = self.env['licitaciones.licitacion'].search(domain)
-            logging.info(f"Dominio aplicado: {domain}")
-            logging.info(f"IDs encontrados: {tenders_ids.ids}")
-            if not tenders_ids:
-                self.tenders_ids = [(6, 0, [])]
-                raise ValidationError(f"No se encontraron licitaciones que coincidan con los criterios seleccionados.")
-                return
-            self.tenders_ids = [(6, 0, tenders_ids.ids)]
+    # @api.onchange('words_ids', 'montoinicial', 'montotope', 'date_start', 'date_end', 'tiposervicio_ids')
+    # def _onchange_words_ids(self):
+    #     logging.info('\n' * 2)
+    #     logging.info('in ochange')
+    #     if self.words_ids or self.montoinicial or self.montotope:
+    #         domain = self.get_domain_tenders()
+    #         if not domain:
+    #             raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
+    #         # domain.append(('estado_item', '=', 'active'))
+    #         tenders_ids = self.env['licitaciones.licitacion'].search(domain)
+    #         logging.info(f"Dominio aplicado: {domain}")
+    #         logging.info(f"IDs encontrados: {tenders_ids.ids}")
+    #         if not tenders_ids:
+    #             self.tenders_ids = [(6, 0, [])]
+    #             return
+    #             # raise ValidationError(f"No se encontraron licitaciones que coincidan con los criterios seleccionados.")
+    #         self.tenders_ids = [(6, 0, tenders_ids.ids)]
 
 
 
@@ -126,6 +151,10 @@ class TendersFavorites(models.Model):
 
         if self.date_end:
             domain.append(('fecha_publicacion', '<=', self.date_end))
+
+        if self.tiposervicio_ids:
+            services = self.tiposervicio_ids.mapped('name')
+            domain.extend([('categoria_adquisicion', 'ilike', f"%{service}%") for service in services])
         logging.info(f"Domain construido: {domain}")
         return domain
 
@@ -137,13 +166,14 @@ class TendersFavorites(models.Model):
         for record in self:
             if not record.email:
                 raise ValidationError(_("Debe agregar correos electronicos para enviar las licitaciones"))
-            record.send_mail_favorite()
+            record.send_mail_favorite(tenders_ids= record.featured_tenders_ids.mapped('tender_id') if record.featured_tenders_ids else record.tenders_ids)
             
             # domain = record.get_domain_tenders()
             # if not domain:
                 # raise ValidationError(_("Debe agregar al menos una de los siguentes campos: Palabras claves, Monto inicial, Monto tope"))
     def send_mail_favorite(self, tenders_ids=None):
-        tenders_ids = self.featured_tenders_ids if not tenders_ids else tenders_ids #self.env['licitaciones.licitacion'].search(domain)
+        if not tenders_ids:
+            raise ValidationError(_("Debe agregar licitaciones"))
         # for favorite in record.emails_ids:
         if self.email:
             if not tenders_ids:
@@ -415,3 +445,15 @@ class TendersFavorites(models.Model):
         favorites = self.search([])
         for favorite in favorites:
             favorite._onchange_words_ids()
+
+    @api.constrains('words_ids')
+    def _check_unique_words_optimized(self):
+        for record in self:
+            if not record.words_ids:
+                continue
+            existing_favorites = self.search([('words_ids', 'in', record.words_ids.ids),('id', '!=', record.id)])
+            if existing_favorites:
+                duplicated_words = record.words_ids & existing_favorites.mapped('words_ids')
+                if duplicated_words:
+                    word_names = ", ".join(duplicated_words.mapped('name'))
+                    raise ValidationError(f"Las siguientes palabras clave ya están asignadas a otro favorito: {word_names}")
