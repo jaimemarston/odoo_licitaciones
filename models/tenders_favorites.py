@@ -446,14 +446,14 @@ class TendersFavorites(models.Model):
         for favorite in favorites:
             favorite._onchange_words_ids()
 
-    @api.constrains('words_ids')
-    def _check_unique_words_optimized(self):
-        for record in self:
-            if not record.words_ids:
-                continue
-            existing_favorites = self.search([('words_ids', 'in', record.words_ids.ids),('id', '!=', record.id)])
-            if existing_favorites:
-                duplicated_words = record.words_ids & existing_favorites.mapped('words_ids')
-                if duplicated_words:
-                    word_names = ", ".join(duplicated_words.mapped('name'))
-                    raise ValidationError(f"Las siguientes palabras clave ya están asignadas a otro favorito: {word_names}")
+    # @api.constrains('words_ids')
+    # def _check_unique_words_optimized(self):
+    #     for record in self:
+    #         if not record.words_ids:
+    #             continue
+    #         existing_favorites = self.search([('words_ids', 'in', record.words_ids.ids),('id', '!=', record.id)])
+    #         if existing_favorites:
+    #             duplicated_words = record.words_ids & existing_favorites.mapped('words_ids')
+    #             if duplicated_words:
+    #                 word_names = ", ".join(duplicated_words.mapped('name'))
+    #                 raise ValidationError(f"Las siguientes palabras clave ya están asignadas a otro favorito: {word_names}")
